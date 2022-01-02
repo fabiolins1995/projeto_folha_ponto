@@ -22,18 +22,15 @@ class financeiroGer extends Controller
     }
     public function listarFinanceiro()
     {
-        DB::table('associados')
+        $teste = DB::table('associados')
             ->join('registro_ponto', 'associados.id','=','registro_ponto.associado')
-            ->join('registro_escala', 'associados.id','=','registro_escalao.associado')
+            ->join('registro_escala', 'associados.id','=','registro_escala.associado')
+            ->join('equipes', 'registro_ponto.equipe','=','equipes.id')
+            ->select(DB::raw("SUM(TIMEDIFF(registro_ponto.horario_registro_entrada,registro_ponto.horario_registro_entrada)) as totalHorasEntrada"))
+            ->groupBy('registro_ponto.horario_registro')
             ->get();
-
-
-            /**->join('associados', 'registro_escala.associado','=', 'associados.id')
-                ->join('locais', 'registro_escala.local','=','locais.id')
-                ->join('equipes', 'registro_escala.equipe','=','equipes.id')
-                ->select('registro_escala.data_escala','associados.nome as associadoNome','locais.nome as localNome','equipes.nome as equipeNome','equipes.cor')//
-                ->get(); */
-        return true;
+        
+        return $teste;
     }
     
 }

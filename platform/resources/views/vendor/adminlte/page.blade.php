@@ -7,6 +7,7 @@
 <!--<link href="css/app.css" rel="stylesheet">-->
 <link rel="stylesheet" href="../plugins/fullcalendar/main.css">
 <link rel="stylesheet" href="../plugins/bootstrap-colorpicker/bootstrap-colorpicker.css">
+<link rel="stylesheet" href="../plugins/datetimepicker/bootstrap-datetimepicker.css">
     @stack('css')
     @yield('css')
 @stop
@@ -57,4 +58,5 @@
     <script src="../plugins/moment/moment.min.js"></script>
     <script src="../plugins/fullcalendar/main.js"></script>
     <script src="../plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="../plugins/datetimepicker/bootstrap-datetimepicker.js"></script>
 @stop

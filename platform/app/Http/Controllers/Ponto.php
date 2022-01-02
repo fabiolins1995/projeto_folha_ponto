@@ -18,11 +18,11 @@ class Ponto extends Controller
     {
         try
         {
-            return DB::table('registro_ponto')
-                ->join('associados', 'registro_ponto.associado','=', 'associados.id')
-                ->join('locais', 'registro_ponto.local','=','locais.id')
-                ->join('equipes', 'registro_ponto.equipe','=','equipes.id')
-                ->select('registro_ponto.horario_registro','associados.nome as associadoNome','locais.nome as localNome','equipes.nome as equipeNome','equipes.cor')//
+            return DB::table('registro_escala')
+                ->join('associados', 'registro_escala.associado','=', 'associados.id')
+                ->join('locais', 'registro_escala.local','=','locais.id')
+                ->join('equipes', 'registro_escala.equipe','=','equipes.id')
+                ->select('registro_escala.horario_escala_entrada','registro_escala.horario_escala_saida','associados.nome as associadoNome','locais.nome as localNome','equipes.nome as equipeNome','equipes.cor')//
                 ->get();
         }
         catch(Exception $e){
@@ -51,11 +51,12 @@ class Ponto extends Controller
         try
         {
             DB::table('registro_escala')->insert([
-                'associado' => $request->input('colaborador'), 
+                'associado' => $request->input('nome'), 
                 'local' => $request->input('local'),
                 'equipe' => $request->input('equipe'),
-                'data_escala' => $request->input('datetime'),
-                'horario_escala' => $request->input('datetime'),
+                'data_escala' => $request->input('dataEntrada'),
+                'horario_escala_entrada' => $request->input('dataEntrada'),
+                'horario_escala_saida' => $request->input('dataSaida'),
             ]);
         }
         catch(Exception $e)
