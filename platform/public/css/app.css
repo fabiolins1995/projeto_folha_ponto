@@ -1,0 +1,39 @@
+.corempresa-azul {
+    background-color: #0c406e;
+}
+
+li.nav-header {
+    color: white;
+}
+
+li.nav-item a p {
+    color: white;
+}
+
+li.nav-item a:hover {
+    text-decoration: none;
+    color: none;
+}
+
+.sidebar {
+    overflow: hidden;
+}
+
+li.nav-item a i {
+    color: #a6be31;
+}
+
+.login-page,
+.register-page {
+    background-color: #0c406e;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0c406e;
+    border-color: #0c406e;
+}
+
+.card-primary.card-outline {
+    border-top: 3px solid #a6be31;
+}
