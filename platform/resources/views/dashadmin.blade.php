@@ -22,21 +22,30 @@
         <div class="card-body">
           <!-- /btn-group -->
           <div class="input-group date">
-            <input id="new-data" type="date" class="form-control" placeholder="Data">
+            <input id="new-data" type="date" class="form-control" id="escalaData" placeholder="Data">
             <div class="input-group date" id="timepicker" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" data-target="#timepicker">
+              <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" id="escalaHora">
               <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="far fa-clock"></i></div>
               </div>
             </div>
           </div>
           <div class="input-group">
-            <input id="new-data" type="text" class="form-control" placeholder="Equipe">
+            <select class="form-control" name="equipe" id="equipe" placeholder="Equipe">
+              <option value=""></option>
+            </select>
           </div>
           <div class="input-group">
-            <input id="new-event" type="text" class="form-control" placeholder="Colaborador">
+            <select class="form-control" name="local" id="local" placeholder="Local">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="input-group">
+            <select class="form-control" name="colaborador" id="colaborador" placeholder="colaborador">
+              <option value=""></option>
+            </select>
             <div class="input-group-append">
-              <button id="add-new-event" type="button" class="btn btn-primary">+</button>
+              <button onclick="addEscala();" type="button" class="btn btn-primary">+</button>
             </div>
             <!-- /btn-group -->
           </div>
@@ -91,10 +100,108 @@
   </div>
   <!-- /.card-body -->
 </div>
-<script>
+<script>  
+  var elementosEvent = [];
   window.addEventListener('load', function() {
     ListaEquipes();
     TabelaHorario();
+    MontaColaborador();
+    MontaLocal();
+    MontaEventos();
+  })
+
+  function ListaEquipes() {
+    $.ajax({
+      url: "/listarEquipes",
+      method: 'GET',
+    }).done(function(result) {
+      count = 0;
+      html2 = '';
+      html = '';
+      $.each(result, function(a, b) {
+        html += '<div class="external-event" style="background-color:' + b.cor + ';position:relative;color:white;">' + b.nome + '</div>';
+        if(count < 6){
+          html2 += '<option value="' + b.id + '">' + b.nome + '</option>';
+          count++;
+        }        
+      });
+      $('#equipe').html(html2);
+      $('#external-events').html(html);
+    });
+  }
+
+  function TabelaHorario() {
+    $.ajax({
+      url: "/listarPontos",
+      method: 'GET',
+    }).done(function(result) {
+      html = '';
+      $.each(result, function(a, b) {
+        html += '<tr>';
+        html += '<td>' + b.associadoNome + '</td>';
+        html += '<td>' + b.localNome + '</td>';
+        html += '<td>' + b.equipeNome + '</td>';
+        html += '<td>' + b.horario_registro + '</td>';
+        html += '</tr>';
+      })
+      $('#tabelaHorario').html(html);
+    });
+  }
+
+  function MontaLocal() {
+    var html = '';
+    $.ajax({
+      url: "/listarLocais",
+      method: 'GET',
+    }).done(function(result) {
+      $.each(result, function(a, b) {
+        html += '<option value=' + b.id + '">' + b.nome + '</option>';
+      });
+      $('#local').html(html);
+    });
+  }
+
+  function MontaColaborador() {
+    var html = '';
+    $.ajax({
+      url: "/listarColaboradores",
+      method: 'GET',
+    }).done(function(result) {
+      $.each(result, function(a, b) {
+        html += '<option value=' + b.id + '">' + b.nome + '</option>';
+      });
+      $('#colaborador').html(html);
+    });
+  }
+
+  function addEscala() {
+    $.ajax({
+      url: "/addEscala?equipe=" + $('#equipe').val() + "&colaborador=" + $('#colaborador').val() + "&datetime=" + $('#escalaData').val() + "&local=" + $('#local').val(),
+      method: 'GET',
+    }).done(function(result) {});
+  }
+
+  function MontaEventos() {
+    $.ajax({
+      url: "/listarEscalas",
+      method: 'GET',
+    }).done(function(result) {
+      $.each(result, function(a, b) {
+        console.log(b);
+        var montagem = {
+          title: b.associadoNome,
+          start: new Date(b.data_escala),
+          bakcgroundColor: b.cor,
+          borderColor: b.cor,
+          allDay: false
+        }
+        elementosEvent.push(montagem)
+      })
+      MontaCalendario();
+    });
+  }
+
+  function MontaCalendario() {
     $(function() {
 
       /* initialize the external events
@@ -153,6 +260,7 @@
         }
       });
 
+
       var calendar = new Calendar(calendarEl, {
         headerToolbar: {
           left: 'prev,next today',
@@ -161,7 +269,7 @@
         },
         themeSystem: 'bootstrap',
         //Random default events
-        events: MontaEventos(),
+        events: elementosEvent,
         editable: true,
         droppable: true, // this allows things to be dropped onto the calendar !!!
         drop: function(info) {
@@ -173,6 +281,8 @@
         }
       });
 
+
+      console.warn(calendar.events);
       calendar.render();
       // $('#calendar').fullCalendar()
 
@@ -214,70 +324,6 @@
         $('#new-event').val('')
       })
     })
-  })
-
-  function ListaEquipes() {
-    $.ajax({
-      url: "/listarEquipes",
-      method: 'GET',
-    }).done(function(result) {
-      html = '';
-      $.each(result, function(a, b) {
-        html += '<div class="external-event" style="background-color:' + b.cor + ';position:relative;color:white;">' + b.nome + '</div>';
-      })
-      $('#external-events').html(html);
-    });
-  }
-  function TabelaHorario()
-  {
-    $.ajax({
-      url: "/listarPontos",
-      method: 'GET',
-    }).done(function(result) {
-    html = '';
-      $.each(result, function(a,b){
-        html += '<tr>';
-        html += '<td>' + b.associadoNome +'</td>';
-        html += '<td>' + b.localNome +'</td>';
-        html += '<td>' + b.equipeNome +'</td>';
-        html += '<td>' + b.horario_registro +'</td>';
-        html += '</tr>';
-      })
-    $('#tabelaHorario').html(html);
-    });
-  }
-  function MontaEventos()
-  {
-    var eventos=[];
-    $.ajax({
-      url: "/listarEscalas",
-      method: 'GET',
-    }).done(function(result) {
-      $.each(result, function(a,b){
-        console.log(b);
-        var montagem = 
-          {
-            title:b.associadoNome,
-            start: new Date(b.data_escala),
-            bakcgroundColor: b.cor,
-            borderColor: b.cor,
-            allDay:false
-          }
-          eventos.push(montagem)
-      })
-    });
-    console.log(eventos);
-    return eventos;
-
-/**
- * {
-            title: 'All Day Event',
-            start: new Date(y, m, 1),
-            backgroundColor: '#f56954', //red
-            borderColor: '#f56954', //red
-            allDay: true
-          },
- */ 
   }
 </script>
 @endsection

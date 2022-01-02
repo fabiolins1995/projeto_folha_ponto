@@ -45,4 +45,22 @@ class Ponto extends Controller
             return false;
         }
     }
+
+    public function addEscala(Request $request)
+    {
+        try
+        {
+            DB::table('registro_escala')->insert([
+                'associado' => $request->input('colaborador'), 
+                'local' => $request->input('local'),
+                'equipe' => $request->input('equipe'),
+                'data_escala' => $request->input('datetime'),
+                'horario_escala' => $request->input('datetime'),
+            ]);
+        }
+        catch(Exception $e)
+        {
+            return false;
+        }
+    }
 }

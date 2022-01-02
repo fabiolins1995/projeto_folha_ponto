@@ -100,7 +100,13 @@ class colaboradorGer extends Controller
     
     public function listarColaboradores()
     {
-        return DB::table('associados')->get();
+        return DB::table('associados')
+            ->join('locais', 'associados.local','=','locais.id')
+            ->join('setores', 'associados.local','=','setores.id')
+            ->join('funcoes', 'associados.local','=','funcoes.id')
+            ->join('especialidades', 'associados.especialidade','=','especialidades.id')
+            ->select('associados.nome as nomeAssociado','locais.nome as localNome','setores.nome as setorNome','funcoes.nome as funcaoNome','especialidades.nome as especialidadeNome')//
+            ->get();
     }
     
     public function deletarColaborador(Request $request)

@@ -46,7 +46,7 @@
 
     function MontaTabela(){
       $.ajax({
-      url: "/listarColaboradores",
+      url: "/listarFinanceiro",
       method: 'GET',
     }).done(function(result) {
       $.each(result, function(a,colaborador){

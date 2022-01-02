@@ -134,7 +134,6 @@
         <tr>
           <th>Nome</th>
           <th>Local</th>
-          <th>Equipe</th>
           <th>Setor</th>
           <th>Função</th>
           <th>Especialidade</th>
@@ -280,11 +279,10 @@
         $.each(result, function(a, b) {
           html += '<tr>';
           html += '<td>' + b.nome + '</td>';
-          html += '<td>' + b.local + '</td>';
-          html += '<td>' + b.equipe + '</td>';
-          html += '<td>' + b.setor + '</td>';
-          html += '<td>' + b.funcao + '</td>';
-          html += '<td>' + b.especialidade + '</td>';
+          html += '<td>' + b.localNome + '</td>';
+          html += '<td>' + b.setorNome + '</td>';
+          html += '<td>' + b.funcaoNome + '</td>';
+          html += '<td>' + b.especialidadeNome + '</td>';
           html += `<td><i style="cursor:pointer" onclick="TabelaEdit(${b.id})" class="far fa-edit"></i> | <i style="cursor:pointer" onclick="TabelaDelete(${b.id})" class="far fa-trash-alt"></i></td>`;
           html += '</tr>';
         });

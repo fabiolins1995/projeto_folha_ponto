@@ -24,6 +24,11 @@ Auth::routes();
 Route::get('/dashadmin', [App\Http\Controllers\Dashboard::class, 'dashadmin'])->name('dash admin');
 Route::get('/dashclientes', [App\Http\Controllers\Dashboard::class, 'dashclientes'])->name('dash clientes');
 
+//Associado
+Route::get('/teste', [App\Http\Controllers\Associado::class, 'teste'])->name('teste');
+Route::get('/listaPonto', [App\Http\Controllers\Associado::class, 'listaPonto'])->name('listaPonto');
+Route::get('/listaEscala', [App\Http\Controllers\Associado::class, 'listaEscala'])->name('listaEscala');
+
 //Equipes
 Route::get('/gerenciamentoequipes', [App\Http\Controllers\EquipesGer::class, 'gerenciamentoequipes'])->name('gerenciamentoequipes');
 Route::post('/salvarEquipe',[App\http\Controllers\EquipesGer::class, 'salvarEquipe'])->name('salvarEquipe');
