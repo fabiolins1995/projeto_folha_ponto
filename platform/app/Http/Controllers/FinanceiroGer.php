@@ -20,14 +20,34 @@ class financeiroGer extends Controller
             return view('financeiro');
         }
     }
+
     public function listarFinanceiro()
     {
         $teste = DB::table('associados')
-            ->join('registro_ponto', 'associados.id','=','registro_ponto.associado')
             ->join('registro_escala', 'associados.id','=','registro_escala.associado')
-            ->join('equipes', 'registro_ponto.equipe','=','equipes.id')
-            ->select(DB::raw("SUM(TIMEDIFF(registro_ponto.horario_registro_entrada,registro_ponto.horario_registro_entrada)) as totalHorasEntrada"))
-            ->groupBy('registro_ponto.horario_registro')
+            ->join('equipes', 'registro_escala.equipe','=','equipes.id')
+            ->select(
+                'associados.id as id',
+                'equipes.nome as nomeEquipe',
+                'associados.banco as bancoAssociado',
+                'associados.numero_agencia as agenciaAssociados',
+                'associados.numero_conta as contaAssociados',
+                )
+            ->distinct('id')
+            ->get();
+        
+        return $teste;
+    }
+
+    public function listarFinanceiroEscala()
+    {
+        $teste = DB::table('associados')
+            ->join('registro_escala', 'associados.id','=','registro_escala.associado')
+            ->join('equipes', 'registro_escala.equipe','=','equipes.id')
+            ->select(
+                'associados.id as id',
+                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(-TIMEDIFF(registro_escala.horario_escala_entrada,registro_escala.horario_escala_saida)))) as Total"))
+            ->groupBy('id')
             ->get();
         
         return $teste;
