@@ -61,13 +61,17 @@ class Ponto extends Controller
     {
         try
         {
-            DB::table('registro_escala')->insert([
+            $escala = DB::table('registro_escala')->insertGetId([
                 'associado' => $request->input('nome'), 
                 'local' => $request->input('local'),
                 'equipe' => $request->input('equipe'),
                 'data_escala' => $request->input('dataEntrada'),
                 'horario_escala_entrada' => $request->input('dataEntrada'),
                 'horario_escala_saida' => $request->input('dataSaida'),
+            ]);
+            DB::table('registro_ponto')->inset([
+                'id_escala' => $escala,
+                'presenca' => '1'
             ]);
         }
         catch(Exception $e)
