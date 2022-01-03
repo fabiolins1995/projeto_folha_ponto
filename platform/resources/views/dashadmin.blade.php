@@ -92,10 +92,9 @@
     MontaColaborador();
     MontaLocal();
     MontaEventos();
-    $(function() {
-      $('.datetimepicker').datetimepicker({
-        defaultDate: "08/02/2016",
-        locale: 'pt-br'
+    $(function(){
+			$('.datetimepicker').appendDtpicker({
+        locale: 'br'
       });
     });
   })
@@ -271,6 +270,13 @@
 
 
       var calendar = new Calendar(calendarEl, {
+        locale: 'pt-br',
+        buttonText: {
+          month: 'mês', 
+          day: 'dia', 
+          week: 'semana',
+          today: 'hoje',
+        },
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
@@ -289,7 +295,6 @@
           }
         }
       });
-
 
       console.warn(calendar.events);
       calendar.render();

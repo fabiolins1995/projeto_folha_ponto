@@ -3,11 +3,14 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
+<link rel="stylesheet" type="text/css" media="screen" href="https://www.jqueryscript.net/css/jquerysctipttop.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 <!--<link href="css/app.css" rel="stylesheet">-->
 <link rel="stylesheet" href="../plugins/fullcalendar/main.css">
+<link rel="stylesheet" href="../css/jquery.simple-dtpicker.css">
 <link rel="stylesheet" href="../plugins/bootstrap-colorpicker/bootstrap-colorpicker.css">
-<link rel="stylesheet" href="../plugins/datetimepicker/bootstrap-datetimepicker.css">
     @stack('css')
     @yield('css')
 @stop
@@ -57,6 +60,10 @@
     <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="../plugins/moment/moment.min.js"></script>
     <script src="../plugins/fullcalendar/main.js"></script>
+    <script src="../plugins/jquery.simple-dtpicker.js"></script>
     <script src="../plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-    <script src="../plugins/datetimepicker/bootstrap-datetimepicker.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
 @stop
