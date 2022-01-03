@@ -49,6 +49,7 @@ Route::post('/editarColaborador',[App\http\Controllers\ColaboradorGer::class, 'e
 Route::get('/financeiro', [App\Http\Controllers\FinanceiroGer::class, 'financeiro'])->name('financeiro');
 Route::get('/listarFinanceiro',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiro'])->name('listarFinanceiro');
 Route::get('/listarFinanceiroEscala',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiroEscala'])->name('listarFinanceiroEscala');
+Route::get('/listarFinanceiroHoras',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiroHoras'])->name('listarFinanceiroHoras');
 
 //Ponto
 Route::get('/listarPontos', [App\Http\Controllers\Ponto::class, 'listarPontos'])->name('listarPontos');

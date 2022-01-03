@@ -23,34 +23,49 @@ class financeiroGer extends Controller
 
     public function listarFinanceiro()
     {
-        $teste = DB::table('associados')
+        return DB::table('associados')
             ->join('registro_escala', 'associados.id','=','registro_escala.associado')
             ->join('equipes', 'registro_escala.equipe','=','equipes.id')
             ->select(
                 'associados.id as id',
+                'associados.nome as nomeAssociado',
                 'equipes.nome as nomeEquipe',
                 'associados.banco as bancoAssociado',
                 'associados.numero_agencia as agenciaAssociados',
                 'associados.numero_conta as contaAssociados',
+                'associados.chave_pix as chaveAssociado'
                 )
             ->distinct('id')
             ->get();
-        
-        return $teste;
     }
 
-    public function listarFinanceiroEscala()
+    public function listarFinanceiroEscala(Request $request)
     {
-        $teste = DB::table('associados')
+        return DB::table('associados')
             ->join('registro_escala', 'associados.id','=','registro_escala.associado')
-            ->join('equipes', 'registro_escala.equipe','=','equipes.id')
+            ->where('associados.id',$request->input('id'))
+            ->whereMonth('registro_escala.horario_escala_entrada','=',$request->input('mes'))
+            ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
             ->select(
                 'associados.id as id',
                 DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(-TIMEDIFF(registro_escala.horario_escala_entrada,registro_escala.horario_escala_saida)))) as Total"))
             ->groupBy('id')
             ->get();
-        
-        return $teste;
+    }
+
+    public function listarFinanceiroHoras(Request $request)
+    {
+        return DB::table('registro_escala')
+            ->join('registro_ponto','registro_escala.id','=','registro_ponto.id_escala')
+            ->where('registro_ponto.presenca','1')
+            ->where('registro_escala.associado',$request->input('id'))
+            ->whereMonth('registro_escala.horario_escala_entrada','=',$request->input('mes'))
+            ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
+            ->select(
+                'registro_escala.associado as id',
+                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(-TIMEDIFF(registro_escala.horario_escala_entrada,registro_escala.horario_escala_saida)))) as Total"))
+            ->groupBy('id')
+            ->get();
     }
     
 }
