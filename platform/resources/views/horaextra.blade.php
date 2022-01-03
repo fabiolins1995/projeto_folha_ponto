@@ -23,6 +23,7 @@
   </fieldset>
 </form>
 <script>
+
     window.addEventListener('load', function() {
       montaAssociado();
       $('#associado').on('change',function(){

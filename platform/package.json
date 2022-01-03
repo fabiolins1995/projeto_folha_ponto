@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "bootstrap-timepicker": "^0.5.2",
         "jquery-datetimepicker": "^2.5.21",
         "simplepicker": "^2.0.4"
     }

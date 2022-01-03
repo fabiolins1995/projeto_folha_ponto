@@ -3,6 +3,9 @@
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 
 @section('adminlte_css')
+<link type="text/css" href="css/bootstrap.min.css" />
+<link type="text/css" href="css/bootstrap-timepicker.min.css" />
+<link href="css/timepicker.css" type="text/css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" media="screen" href="https://www.jqueryscript.net/css/jquerysctipttop.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
@@ -62,7 +65,11 @@
     <script src="../plugins/fullcalendar/main.js"></script>
     <script src="../plugins/jquery.simple-dtpicker.js"></script>
     <script src="../plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
     
+    <script type="text/javascript" src="dist/bootstrap-timepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
