@@ -21,33 +21,8 @@
         </div>
         <div class="card-body">
           <!-- /btn-group -->
-          <div class="input-group date">
-            <input id="new-data" type="date" class="form-control" id="escalaData" placeholder="Data">
-            <div class="input-group date" id="timepicker" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" data-target="#timepicker" id="escalaHora">
-              <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="far fa-clock"></i></div>
-              </div>
-            </div>
-          </div>
           <div class="input-group">
-            <select class="form-control" name="equipe" id="equipe" placeholder="Equipe">
-              <option value=""></option>
-            </select>
-          </div>
-          <div class="input-group">
-            <select class="form-control" name="local" id="local" placeholder="Local">
-              <option value=""></option>
-            </select>
-          </div>
-          <div class="input-group">
-            <select class="form-control" name="colaborador" id="colaborador" placeholder="colaborador">
-              <option value=""></option>
-            </select>
-            <div class="input-group-append">
-              <button onclick="addEscala();" type="button" class="btn btn-primary">+</button>
-            </div>
-            <!-- /btn-group -->
+            <button onclick="addEscala();" style="width:100%" type="button" class="btn btn-primary">Adicionar</button>
           </div>
           <!-- /input-group -->
         </div>
@@ -67,47 +42,62 @@
   </div>
   <!-- /.col -->
 </div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Tabela de Horários</h3>
-
-    <div class="card-tools">
-      <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Pesquisar">
-
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-default">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
+<div id="modalAddEscala" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Escala</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <form method="post" action="/addEscala" accept-charset="UTF-8">
+          @csrf
+          <div class="card-body">
+            <div class="form-group">
+              <label for="nomeEquipe">Nome colaborador</label>
+              <select name="nome" class="form-control" id="nomeModal"></select>
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Local</label>
+              <select name="local" class="form-control" id="localModal"></select>
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Equipe</label>
+              <select name="equipe" class="form-control" id="equipeModal"></select>
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Data entrada</label>
+              <input type="text" name="dataEntrada" class="form-control datetimepicker" id="dataEntradaModal" placeholder="Data entrada">
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Data saída</label>
+              <input type="text" name="dataSaida" class="form-control datetimepicker" id="dataSaidaModal" placeholder="Data saída">
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+      </form>
     </div>
   </div>
-  <!-- /.card-header -->
-  <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-      <thead>
-        <tr>
-          <th>Colaborador</th>
-          <th>Local</th>
-          <th>Equipe</th>
-          <th>Data/Hora</th>
-        </tr>
-      </thead>
-      <tbody id="tabelaHorario">
-      </tbody>
-    </table>
-  </div>
-  <!-- /.card-body -->
 </div>
-<script>  
+<script>
   var elementosEvent = [];
   window.addEventListener('load', function() {
     ListaEquipes();
-    TabelaHorario();
     MontaColaborador();
     MontaLocal();
     MontaEventos();
+    $(function() {
+      $('.datetimepicker').datetimepicker({
+        defaultDate: "08/02/2016",
+        locale: 'pt-br'
+      });
+    });
   })
 
   function ListaEquipes() {
@@ -120,31 +110,13 @@
       html = '';
       $.each(result, function(a, b) {
         html += '<div class="external-event" style="background-color:' + b.cor + ';position:relative;color:white;">' + b.nome + '</div>';
-        if(count < 6){
+        if (count < 6) {
           html2 += '<option value="' + b.id + '">' + b.nome + '</option>';
           count++;
-        }        
+        }
       });
       $('#equipe').html(html2);
       $('#external-events').html(html);
-    });
-  }
-
-  function TabelaHorario() {
-    $.ajax({
-      url: "/listarPontos",
-      method: 'GET',
-    }).done(function(result) {
-      html = '';
-      $.each(result, function(a, b) {
-        html += '<tr>';
-        html += '<td>' + b.associadoNome + '</td>';
-        html += '<td>' + b.localNome + '</td>';
-        html += '<td>' + b.equipeNome + '</td>';
-        html += '<td>' + b.horario_registro + '</td>';
-        html += '</tr>';
-      })
-      $('#tabelaHorario').html(html);
     });
   }
 
@@ -175,10 +147,47 @@
   }
 
   function addEscala() {
-    $.ajax({
-      url: "/addEscala?equipe=" + $('#equipe').val() + "&colaborador=" + $('#colaborador').val() + "&datetime=" + $('#escalaData').val() + "&local=" + $('#local').val(),
-      method: 'GET',
-    }).done(function(result) {});
+    $('#modalAddEscala').modal('show');
+    montaEquipe();
+    montaLocal();
+    montaColaborador();
+
+    function montaEquipe() {
+      var html = "";
+      $.ajax({
+        url: "/listarEquipes",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value="' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#equipeModal').html(html);
+      });
+    }
+
+    function montaLocal() {
+      var html = "";
+      var data = "";
+      $.get('/listarLocais', data, function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value="' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#localModal').html(html);
+      });
+    }
+
+    function montaColaborador() {
+      var html = "";
+      $.ajax({
+        url: "/listarColaboradores",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value="' + b.id + '">' + b.nomeAssociado + '</option>';
+        });
+        $('#nomeModal').html(html);
+      });
+    }
   }
 
   function MontaEventos() {
