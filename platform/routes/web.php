@@ -50,10 +50,16 @@ Route::get('/financeiro', [App\Http\Controllers\FinanceiroGer::class, 'financeir
 Route::get('/listarFinanceiro',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiro'])->name('listarFinanceiro');
 Route::get('/listarFinanceiroEscala',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiroEscala'])->name('listarFinanceiroEscala');
 Route::get('/listarFinanceiroHoras',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiroHoras'])->name('listarFinanceiroHoras');
+Route::get('/listarFinanceiroExtras',[App\http\Controllers\FinanceiroGer::class, 'listarFinanceiroExtras'])->name('listarFinanceiroExtras');
 
 //Ponto
 Route::get('/listarPontos', [App\Http\Controllers\Ponto::class, 'listarPontos'])->name('listarPontos');
 Route::get('/listarEscalas', [App\Http\Controllers\Ponto::class, 'listarEscalas'])->name('listarEscalas');
+Route::get('/falta', [App\Http\Controllers\Ponto::class, 'falta'])->name('falta');
+Route::get('/horaextra', [App\Http\Controllers\Ponto::class, 'horaextra'])->name('horaextra');
+Route::get('/listarDatas', [App\Http\Controllers\Ponto::class, 'listarDatas'])->name('listarDatas');
+Route::post('/registrarFalta', [App\Http\Controllers\Ponto::class, 'registrarFalta'])->name('registrarFalta');
+Route::post('/registrarHoraExtra', [App\Http\Controllers\Ponto::class, 'registrarHoraExtra'])->name('registrarHoraExtra');
 
 //Um campo
 //Cadastro

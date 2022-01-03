@@ -101,7 +101,16 @@
             $.each(result, function(a,b){
               html += '<td>' + b.Total + '</td>';
             });
-          });        
+          }); 
+          $.ajax({
+            url: "/listarFinanceiroExtras?id="+colaborador.id+"&mes="+mes+"&ano="+ano,
+            method: 'GET',
+            async: false
+          }).done(function(result) {
+            $.each(result, function(a,b){
+              html += '<td>' + b.Total + '</td>';
+            });
+          });           
           html += '</tr>';
         });
         $('#tabelaFinanceiro').html(html);

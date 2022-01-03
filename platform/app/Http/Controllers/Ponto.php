@@ -13,7 +13,18 @@ class Ponto extends Controller
     {
         $this->middleware('auth');
     }
-    
+    public function falta()
+    {
+        if(Auth::user()->tipo == 1){ 
+            return view('falta');
+        }
+    }
+    public function horaextra()
+    {
+        if(Auth::user()->tipo == 1){ 
+            return view('horaextra');
+        }
+    }
     public function listarPontos()
     {
         try
@@ -63,5 +74,33 @@ class Ponto extends Controller
         {
             return false;
         }
+    }
+    public function listarDatas(Request $request)
+    {
+        return DB::table('registro_escala')
+            ->join('registro_ponto','registro_escala.id','registro_ponto.id_escala')
+            ->where('registro_escala.associado',$request->input('id'))
+            ->get();
+    }
+
+    public function registrarFalta(Request $request)
+    {
+        DB::table('registro_ponto')
+        ->where('registro_ponto.id_escala',$request->input('data'))
+        ->update([
+            'presenca' => '0',
+            'observaocao' => $request->input('obs')
+        ]);
+        return view('falta');    
+    }
+
+    public function registrarHoraExtra(Request $request)
+    {
+        DB::table('registro_extra')->insert([
+            'id_escala' => $request->input('data'),
+            'hora' => $request->input('hora'),
+            'observaocao' => $request->input('obs')
+        ]);
+        return view('horaextra');    
     }
 }

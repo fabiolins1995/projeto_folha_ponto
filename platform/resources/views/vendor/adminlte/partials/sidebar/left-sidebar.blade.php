@@ -89,6 +89,28 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-header ">
+                        Registro
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/falta">
+                            <i class="fas fa-user "></i>
+                            <p>
+                                Falta
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/horaextra">
+                            <i class="fas fa-user "></i>
+                            <p>
+                                Hora Extra
+                            </p>
+                        </a>
+                    </li>
                 <?php }; ?>
             </ul>
         </nav>
