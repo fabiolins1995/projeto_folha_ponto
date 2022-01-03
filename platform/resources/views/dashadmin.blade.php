@@ -198,7 +198,8 @@
         console.log(b);
         var montagem = {
           title: b.associadoNome,
-          start: new Date(b.data_escala),
+          start: new Date(b.entrada),
+          end: new Date(b.saida),
           bakcgroundColor: b.cor,
           borderColor: b.cor,
           allDay: false

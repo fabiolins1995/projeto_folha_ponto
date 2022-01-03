@@ -32,8 +32,9 @@
         method: 'GET',
         async: false
         }).done(function(result) {
+          html += '<option value="">Selecione</option>'
             $.each(result, function(a, b) {
-                html += '<option value=' + b.id + '">' + b.nomeAssociado + '</option>';
+                html += '<option value="' + b.id + '">' + b.nomeAssociado + '</option>';
             });
         });
         $('#associado').html(html);
@@ -45,11 +46,12 @@
         method: 'GET',
         async: false
         }).done(function(result) {
+          html += '<option value="">Selecione</option>'
             $.each(result, function(a, b) {
-                html += '<option value=' + b.id + '">' + b.horario_escala_entrada + '</option>';
+                html += '<option value="' + b.id + '">' + b.horario_escala_entrada + '</option>';
             });
         });
-        $('#associado').html(html);
+        $('#data').html(html);
     }
 </script>
 @endsection

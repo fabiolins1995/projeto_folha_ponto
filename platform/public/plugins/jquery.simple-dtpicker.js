@@ -16,6 +16,9 @@
 			nextMonth: 'Next month',
 			today: 'Today'
 		},
+		ho:{
+			format: 'hh:mm',
+		},
 		ro:{
 			days: ['Dum', 'Lun', 'Mar', 'Mie', 'Joi', 'Vin', 'Sâm'],
 			months: ['Ian', 'Feb', 'Mar', 'Apr', 'Mai', 'Iun', 'Iul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -40,7 +43,7 @@
 		br: {
 			days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
 			months: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
-			format: 'DD/MM/YYYY hh:mm'
+			format: 'YYYY-MM-DD hh:mm'
 		},
 		pt: {
 			days: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'],

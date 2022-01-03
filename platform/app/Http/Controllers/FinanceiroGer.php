@@ -79,7 +79,7 @@ class financeiroGer extends Controller
             ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
             ->select(
                 'registro_escala.associado as id',
-                DB::raw("SUM(registro_extra.hora)"))
+                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(registro_extra.hora))) as Total"))
             ->groupBy('id')
             ->get();
     }
