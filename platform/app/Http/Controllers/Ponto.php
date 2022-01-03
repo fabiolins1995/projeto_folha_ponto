@@ -86,6 +86,7 @@ class Ponto extends Controller
             ->join('registro_ponto','registro_escala.id','registro_ponto.id_escala')
             ->where('registro_ponto.presenca','1')
             ->where('registro_escala.associado',$request->input('id'))
+            ->select('registro_escala.id as id','registro_escala.horario_escala_entrada as horario_escala_entrada')
             ->get();
     }
 
