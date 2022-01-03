@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
       <label for="hora" class="form-label"> Hora Extra</label>
-      <select id="hora" name="hora" class="form-control"></select>
+      <input id="horaExtra" name="horaExtra" class="form-control timepicker" placeholder="">
     </div>
     <div class="mb-3">
       <label for="obs" class="form-label"> Observações</label>
@@ -23,6 +23,7 @@
   </fieldset>
 </form>
 <script>
+
     window.addEventListener('load', function() {
       montaAssociado();
       $('#associado').on('change',function(){
@@ -55,5 +56,16 @@
         });
         $('#associado').html(html);
     }
+ $(function(){
+			$('.timepicker').timepicker({
+        showInputs: false,
+        defaultTime: '',
+        minuteStep: 1,
+        disableFocus: true,
+        template: 'dropdown',
+        showMeridian: false
+        locale: 'br'
+      });
+    });
 </script>
 @endsection
