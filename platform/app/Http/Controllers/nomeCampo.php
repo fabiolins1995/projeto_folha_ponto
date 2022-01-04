@@ -73,12 +73,10 @@ class nomeCampo extends Controller
             return false;
         }
     }
-    public function listarLocais(Request $request){
-        try{
-            return DB::table('locais')->get();
-        }catch(Exception $e){
-            return false;
-        }
+    public function listarLocais(){
+            return DB::table('locais')
+                ->select('locais.id as id','locais.nome as nome')
+                ->get();
     }
     public function listarSetores(Request $request){
         try{

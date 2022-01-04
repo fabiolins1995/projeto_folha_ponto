@@ -65,7 +65,7 @@ Route::post('/addEscala', [App\Http\Controllers\Ponto::class, 'addEscala'])->nam
 //Cadastro
 Route::post('/cadastraFuncao', [App\Http\Controllers\nomeCampo::class, 'cadastraFuncao'])->name('cadastraFuncao');
 Route::post('/cadastraBanco', [App\Http\Controllers\nomeCampo::class, 'cadastraBanco'])->name('cadastraBanco');
-Route::post('/cadastraLocal', [App\Http\Controllers\nomeCampo::class, 'cadastraLocal'])->name('cadastraLocal');
+Route::get('/cadastraLocal', [App\Http\Controllers\nomeCampo::class, 'cadastraLocal'])->name('cadastraLocal');
 Route::post('/cadastraSetor', [App\Http\Controllers\nomeCampo::class, 'cadastraSetor'])->name('cadastraSetor');
 Route::post('/cadastraEspecialidade', [App\Http\Controllers\nomeCampo::class, 'cadastraEspecialidade'])->name('cadastraEspecialidade');
 
@@ -73,5 +73,5 @@ Route::post('/cadastraEspecialidade', [App\Http\Controllers\nomeCampo::class, 'c
 Route::get('/listarEspecialidades', [App\Http\Controllers\nomeCampo::class, 'listarEspecialidades'])->name('listarEspecialidades');
 Route::get('/listarBancos', [App\Http\Controllers\nomeCampo::class, 'listarBancos'])->name('listarBancos');
 Route::get('/listarFuncoes', [App\Http\Controllers\nomeCampo::class, 'listarFuncoes'])->name('listarFuncoes');
-Route::get('/listarLocais', [App\Http\Controllers\nomeCampo::class, 'listarFuncoes'])->name('listarFuncoes');
+Route::get('/listarLocais', [App\Http\Controllers\nomeCampo::class, 'listarLocais'])->name('listarLocais');
 Route::get('/listarSetores', [App\Http\Controllers\nomeCampo::class, 'listarSetores'])->name('listarSetores');

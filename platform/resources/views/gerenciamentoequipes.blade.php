@@ -176,6 +176,7 @@
               $('#nomeModal').val(result.nome)
               $('#corQuadrado').css('color', result.cor);
               $('#corQuadradoModal').css('color', result.cor);
+              $('#corEquipeModal').val(result.cor);
             });            
           }
         });
