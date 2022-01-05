@@ -14,15 +14,15 @@
       </div>
       <div class="form-group">
         <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" class="form-control" placeholder="Endereço">
+        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone" maxlength="11">
       </div>
       <div class="form-group">
         <label for="telefone">E-mail</label>
         <input type="email" name="email" class="form-control" placeholder="E-mail">
       </div>
       <div class="form-group">
-        <label for="cpf">CPF/Registro</label>
-        <input type="text" name="cpf" class="form-control" placeholder="CPF/Registro">
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" maxlength="11">
       </div>
       <div class="form-group">
         <label for="equipe">Equipe</label>
@@ -165,15 +165,15 @@
             </div>
             <div class="form-group">
               <label for="telefone">Telefone</label>
-              <input type="text" name="telefone" id="telefoneModal" class="form-control" placeholder="Endereço">
+              <input type="text" name="telefone" id="telefoneModal" class="form-control" placeholder="Telefone" maxlength="11">
             </div>
             <div class="form-group">
-              <label for="telefone">E-mail</label>
+              <label for="email">E-mail</label>
               <input type="email" name="email" id="emailModal" class="form-control" placeholder="E-mail">
             </div>
             <div class="form-group">
               <label for="cpf">CPF/Registro</label>
-              <input type="text" name="cpf" id="cpfModal" class="form-control" placeholder="CPF/Registro">
+              <input type="text" name="cpf" id="cpf" class="form-control cpf" placeholder="CPF/Registro" maxlength="11">
             </div>
             <div class="form-group">
               <label for="equipe">Equipe</label>
@@ -251,6 +251,7 @@
   </div>
   <script>
     window.addEventListener('load', function() {
+      
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -278,7 +279,7 @@
       }).done(function(result) {
         $.each(result, function(a, b) {
           html += '<tr>';
-          html += '<td>' + b.nome + '</td>';
+          html += '<td>' + b.nomeAssociado + '</td>';
           html += '<td>' + b.localNome + '</td>';
           html += '<td>' + b.setorNome + '</td>';
           html += '<td>' + b.funcaoNome + '</td>';
@@ -466,8 +467,8 @@
 
     function addFuncao() {
       Swal.fire({
-        title: "Adicionar uma funcao",
-        text: "Digite o nome da nova funcao",
+        title: "Adicionar uma função",
+        text: "Digite o nome da nova função",
         input: "text",
         showCancelButton: true,
       }).then((result) => {
@@ -483,7 +484,7 @@
           method: 'POST',
         }).done(function(result) {
           if (result == true) {
-            swal("Pronto!", "Adicionado novo funcao: " + inputValue, "success");
+            swal("Pronto!", "Adicionado nova função: " + inputValue, "success");
             montaFuncao();
           }
         });

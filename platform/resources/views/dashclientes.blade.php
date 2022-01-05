@@ -55,7 +55,8 @@
           <th>Colaborador</th>
           <th>Local</th>
           <th>Equipe</th>
-          <th>Data/Hora</th>
+          <th>Data/Hora Entrada</th>
+          <th>Data/Hora Saída</th>
         </tr>
       </thead>
       <tbody id="tabelaHorario">
@@ -73,7 +74,7 @@
   });
   function TabelaHorario() {
     $.ajax({
-      url: "/listaPonto",
+      url: "/listaEscala",
       method: 'GET',
     }).done(function(result) {
       html = '';
@@ -82,7 +83,8 @@
         html += '<td>' + b.associadoNome + '</td>';
         html += '<td>' + b.localNome + '</td>';
         html += '<td>' + b.equipeNome + '</td>';
-        html += '<td>' + b.horario_registro + '</td>';
+        html += '<td>' + b.entrada + '</td>';
+        html += '<td>' + b.saida + '</td>';
         html += '</tr>';
       })
       $('#tabelaHorario').html(html);

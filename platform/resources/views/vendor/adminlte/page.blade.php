@@ -68,6 +68,9 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+    <script src="http://www.geradorcpf.com/scripts.js"></script>
+    <script src="http://www.geradorcpf.com/jquery-1.2.6.pack.js"></script>
+    <script src="http://www.geradorcpf.com/jquery.maskedinput-1.1.4.pack.js"></script>
     
     <script type="text/javascript" src="dist/bootstrap-timepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

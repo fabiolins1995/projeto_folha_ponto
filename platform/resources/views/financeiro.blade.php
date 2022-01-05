@@ -89,6 +89,9 @@
             method: 'GET',
             async: false
           }).done(function(result) {
+            if(result.length == 0) {
+              html += '<td></td>';
+            }
             $.each(result, function(a,b){
               html += '<td>' + b.Total + '</td>';
             });
@@ -98,6 +101,9 @@
             method: 'GET',
             async: false
           }).done(function(result) {
+            if(result.length == 0) {
+              html += '<td></td>';
+            }
             $.each(result, function(a,b){
               html += '<td>' + b.Total + '</td>';
             });
@@ -107,6 +113,9 @@
             method: 'GET',
             async: false
           }).done(function(result) {
+            if(result.length == 0) {
+              html += '<td></td>';
+            }
             $.each(result, function(a,b){
               html += '<td>' + b.Total + '</td>';
             });

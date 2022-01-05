@@ -15,10 +15,10 @@
       <label for="hora" class="form-label"> Hora Extra</label>
       <input type="text" id="hora" name="hora" class="form-control" />
     </div>
-    <div class="mb-3">
+   <!-- <div class="mb-3">
       <label for="obs" class="form-label"> Observações</label>
       <input type="text" id="obs" name="obs" class="form-control" placeholder="">
-    </div>
+    </div>-->
     <button type="submit" class="btn btn-primary">Registrar hora extra</button>
   </fieldset>
 </form>

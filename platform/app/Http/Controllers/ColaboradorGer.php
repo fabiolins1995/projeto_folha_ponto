@@ -54,7 +54,7 @@ class colaboradorGer extends Controller
                 'tipo_de_conta' => $tipo_de_conta,
             ]);
 
-            return view('colaborador');
+            return redirect('/colaborador');
         }catch(Exception $e){
             return $e;
         }
@@ -102,8 +102,8 @@ class colaboradorGer extends Controller
     {
         return DB::table('associados')
             ->join('locais', 'associados.local','=','locais.id')
-            ->join('setores', 'associados.local','=','setores.id')
-            ->join('funcoes', 'associados.local','=','funcoes.id')
+            ->join('setores', 'associados.setor','=','setores.id')
+            ->join('funcoes', 'associados.funcao','=','funcoes.id')
             ->join('especialidades', 'associados.especialidade','=','especialidades.id')
             ->select('associados.id as id','associados.nome as nomeAssociado','locais.nome as localNome','setores.nome as setorNome','funcoes.nome as funcaoNome','especialidades.nome as especialidadeNome')//
             ->get();

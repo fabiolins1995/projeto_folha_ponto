@@ -43,7 +43,7 @@ Route::post('/salvarColaborador',[App\http\Controllers\ColaboradorGer::class, 's
 Route::get('/listarColaboradores',[App\http\Controllers\ColaboradorGer::class, 'listarColaboradores'])->name('listarColaboradores');
 Route::get('/listaColaborador',[App\http\Controllers\ColaboradorGer::class, 'listaColaborador'])->name('listaColaborador');
 Route::post('/editarColaborador',[App\http\Controllers\ColaboradorGer::class, 'editarColaborador'])->name('editarColaborador');
-
+Route::get('/deletarColaborador',[App\http\Controllers\ColaboradorGer::class, 'deletarColaborador'])->name('deletarColaborador');
 
 //Financeiro
 Route::get('/financeiro', [App\Http\Controllers\FinanceiroGer::class, 'financeiro'])->name('financeiro');
@@ -65,7 +65,7 @@ Route::post('/addEscala', [App\Http\Controllers\Ponto::class, 'addEscala'])->nam
 //Cadastro
 Route::post('/cadastraFuncao', [App\Http\Controllers\nomeCampo::class, 'cadastraFuncao'])->name('cadastraFuncao');
 Route::post('/cadastraBanco', [App\Http\Controllers\nomeCampo::class, 'cadastraBanco'])->name('cadastraBanco');
-Route::get('/cadastraLocal', [App\Http\Controllers\nomeCampo::class, 'cadastraLocal'])->name('cadastraLocal');
+Route::post('/cadastraLocal', [App\Http\Controllers\nomeCampo::class, 'cadastraLocal'])->name('cadastraLocal');
 Route::post('/cadastraSetor', [App\Http\Controllers\nomeCampo::class, 'cadastraSetor'])->name('cadastraSetor');
 Route::post('/cadastraEspecialidade', [App\Http\Controllers\nomeCampo::class, 'cadastraEspecialidade'])->name('cadastraEspecialidade');
 
