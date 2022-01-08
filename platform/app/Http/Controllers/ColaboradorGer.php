@@ -31,6 +31,7 @@ class colaboradorGer extends Controller
             $especialidade = $request->input('especialidade');
             $funcao = $request->input('funcao');
             $local = $request->input('local');
+            $equipe = $request->input('equipe');
             $nome = $request->input('nome');
             $numero_agencia = $request->input('numero_agencia');
             $numero_conta = $request->input('numero_conta');
@@ -46,6 +47,7 @@ class colaboradorGer extends Controller
                 'especialidade' => $especialidade,
                 'funcao' => $funcao,
                 'local' => $local,
+                'equipe' => $equipe,
                 'nome' => $nome,
                 'numero_agencia' => $numero_agencia,
                 'numero_conta' => $numero_conta,
@@ -62,6 +64,7 @@ class colaboradorGer extends Controller
     
     public function editarColaborador(Request $request){
         try{
+            $id = $request->input('id');
             $banco = $request->input('banco');
             $chave_pix = $request->input('chave_pix');
             $cpf = $request->input('cpf');
@@ -69,6 +72,7 @@ class colaboradorGer extends Controller
             $especialidade = $request->input('especialidade');
             $funcao = $request->input('funcao');
             $local = $request->input('local');
+            $equipe = $request->input('equipe');
             $nome = $request->input('nome');
             $numero_agencia = $request->input('numero_agencia');
             $numero_conta = $request->input('numero_conta');
@@ -76,7 +80,7 @@ class colaboradorGer extends Controller
             $telefone = $request->input('telefone');
             $tipo_de_conta = $request->input('tipo_de_conta');
 
-            DB::table('associados')->where('id', $request->input('id'))->update([
+            DB::table('associados')->where('id', $id)->update([
                 'banco' => $banco, 
                 'chave_pix' => $chave_pix,
                 'cpf' => $cpf,
@@ -84,6 +88,7 @@ class colaboradorGer extends Controller
                 'especialidade' => $especialidade,
                 'funcao' => $funcao,
                 'local' => $local,
+                'equipe' => $equipe,
                 'nome' => $nome,
                 'numero_agencia' => $numero_agencia,
                 'numero_conta' => $numero_conta,

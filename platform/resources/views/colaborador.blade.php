@@ -158,6 +158,7 @@
       <div class="modal-body">
         <form method="post" action="/editarColaborador" accept-charset="UTF-8">
           @csrf
+          <input type="hidden" name="idModal" name="idModal" value="" />
           <div class="card-body">
             <div class="form-group">
               <label for="nome">Nome</label>
@@ -173,7 +174,7 @@
             </div>
             <div class="form-group">
               <label for="cpf">CPF/Registro</label>
-              <input type="text" name="cpf" id="cpf" class="form-control cpf" placeholder="CPF/Registro" maxlength="11">
+              <input type="text" name="cpf" id="cpfModal" class="form-control cpf" placeholder="CPF/Registro" maxlength="11">
             </div>
             <div class="form-group">
               <label for="equipe">Equipe</label>
@@ -589,6 +590,7 @@
             swal("Error!", "Tente novamente, se persistir, contate o administrador", "error");
           }else{
             $.each(result, function (a, result){
+              $("#idModal").val(result.id);
               $("#chave_pixModal").val(result.chave_pix);
               $("#tipo_de_contaModal").val(result.tipo_de_conta);
               $("#numero_contaModal").val(result.numero_conta);

@@ -10,7 +10,7 @@
         </div>
         <div class="card-body">
           <!-- the events -->
-            <div id="external-events"></div>
+          <div id="external-events"></div>
         </div>
         <!-- /.card-body -->
       </div>
@@ -22,7 +22,8 @@
         <div class="card-body">
           <!-- /btn-group -->
           <div class="input-group">
-            <button onclick="addEscala();" style="width:100%" type="button" class="btn btn-primary">Adicionar</button>
+            <button onclick="addEscala();" style="width:100%;margin-bottom:10px;" type="button" class="btn btn-primary">Adicionar</button>
+            <button onclick="addEscalaGrupo();" style="width:100%" type="button" class="btn btn-primary">Adicionar em equipe</button>
           </div>
           <!-- /input-group -->
         </div>
@@ -85,71 +86,202 @@
     </div>
   </div>
 </div>
-<script>
-  var elementosEvent = [];
-  window.addEventListener('load', function() {
-    ListaEquipes();
-    MontaColaborador();
-    MontaLocal();
-    MontaEventos();
-    $(function(){
-			$('.datetimepicker').appendDtpicker({
-        locale: 'br'
+<div id="modalAddEscalaGrupo" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Adicionar Escala Equipe/h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/addEscalaGrupo" accept-charset="UTF-8">
+          @csrf
+          <div class="card-body">
+            <div class="form-group">
+              <label for="nomeEquipe">Local</label>
+              <select name="local" class="form-control" id="localModalGrupo"></select>
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Equipe</label>
+              <select name="equipe" class="form-control" id="equipeModalGrupo"></select>
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Hora entrada</label>
+              <input type="text" name="dataEntrada" class="form-control datetimepicker" id="dataEntradaModalGrupo" placeholder="Data entrada">
+            </div>
+            <div class="form-group">
+              <label for="nomeEquipe">Hora saída</label>
+              <input type="text" name="dataSaida" class="form-control datetimepicker" id="dataSaidaModalGrupo" placeholder="Data saída">
+            </div>
+            <div class="form-group">
+              <label for="diasSemeana">Dias da semana</label>
+              <div class="form-check">
+                <input type="checkbox" name="seg" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Seg</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="ter" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Ter</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="qua" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Qua</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="qui" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Qui</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="sex" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Sex</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="sab" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Sab</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" name="dom" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Dom</label>
+              </div>
+              <div class="form-group">
+                <label for="mesRef">Mês de referência</label>
+                <select name="mesRef" class="form-control">
+                  <option value="01">Janeiro</option>
+                  <option value="02">Fevereiro</option>
+                  <option value="03">Março</option>
+                  <option value="04">Abril</option>
+                  <option value="05">Maio</option>
+                  <option value="06">Junho</option>
+                  <option value="07">Julho</option>
+                  <option value="08">Agosto</option>
+                  <option value="09">Setembro</option>
+                  <option value="10">Outubro</option>
+                  <option value="11">Novembro</option>
+                  <option value="12">Dezembro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <select id="ano" name="anoRef" class="form-control">
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    var elementosEvent = [];
+    window.addEventListener('load', function() {
+      ListaEquipes();
+      MontaColaborador();
+      MontaLocal();
+      MontaEventos();
+      MontaAno();
+      $(function() {
+        $('.datetimepicker').appendDtpicker({
+          locale: 'ho'
+        });
       });
-    });
-  })
+    })
 
-  function ListaEquipes() {
-    $.ajax({
-      url: "/listarEquipes",
-      method: 'GET',
-    }).done(function(result) {
-      count = 0;
-      html2 = '';
+    function MontaAno() {
+      d = new Date()
       html = '';
-      $.each(result, function(a, b) {
-        html += '<div class="external-event" style="background-color:' + b.cor + ';position:relative;color:white;">' + b.nome + '</div>';
-        if (count < 6) {
-          html2 += '<option value="' + b.id + '">' + b.nome + '</option>';
-          count++;
-        }
-      });
-      $('#equipe').html(html2);
-      $('#external-events').html(html);
-    });
-  }
+      for (var i = d.getFullYear(); i < d.getFullYear() + 5; i++) {
+        html += '<option value="' + i + '">' + i + '</option>'
+      }
+      $('#ano').html(html);
+    }
 
-  function MontaLocal() {
-    var html = '';
-    $.ajax({
-      url: "/listarLocais",
-      method: 'GET',
-    }).done(function(result) {
-      $.each(result, function(a, b) {
-        html += '<option value=' + b.id + '">' + b.nome + '</option>';
+    function ListaEquipes() {
+      $.ajax({
+        url: "/listarEquipes",
+        method: 'GET',
+      }).done(function(result) {
+        count = 0;
+        html2 = '';
+        html = '';
+        $.each(result, function(a, b) {
+          html += '<div class="external-event" style="background-color:' + b.cor + ';position:relative;color:white;">' + b.nome + '</div>';
+          if (count < 6) {
+            html2 += '<option value="' + b.id + '">' + b.nome + '</option>';
+            count++;
+          }
+        });
+        $('#equipe').html(html2);
+        $('#external-events').html(html);
       });
-      $('#local').html(html);
-    });
-  }
+    }
 
-  function MontaColaborador() {
-    var html = '';
-    $.ajax({
-      url: "/listarColaboradores",
-      method: 'GET',
-    }).done(function(result) {
-      $.each(result, function(a, b) {
-        html += '<option value=' + b.id + '">' + b.nome + '</option>';
+    function MontaLocal() {
+      var html = '';
+      $.ajax({
+        url: "/listarLocais",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value=' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#local').html(html);
       });
-      $('#colaborador').html(html);
-    });
-  }
+    }
 
-  function addEscala() {
-    $('#modalAddEscala').modal('show');
-    montaEquipe();
-    montaLocal();
-    montaColaborador();
+    function MontaColaborador() {
+      var html = '';
+      $.ajax({
+        url: "/listarColaboradores",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value=' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#colaborador').html(html);
+      });
+    }
+
+    function addEscalaGrupo() {
+      $('#modalAddEscalaGrupo').modal('show');
+      montaEquipeGrupo();
+      montaLocalGrupo();
+    }
+
+    function addEscala() {
+      $('#modalAddEscala').modal('show');
+      montaEquipe();
+      montaLocal();
+      montaColaborador();
+    }
+
+    function montaEquipeGrupo() {
+      var html = "";
+      $.ajax({
+        url: "/listarEquipes",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value="' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#equipeModalGrupo').html(html);
+      });
+    }
+
+    function montaLocalGrupo() {
+      var html = "";
+      var data = "";
+      $.get('/listarLocais', data, function(result) {
+        $.each(result, function(a, b) {
+          html += '<option value="' + b.id + '">' + b.nome + '</option>';
+        });
+        $('#localModalGrupo').html(html);
+      });
+    }
 
     function montaEquipe() {
       var html = "";
@@ -187,158 +319,157 @@
         $('#nomeModal').html(html);
       });
     }
-  }
 
-  function MontaEventos() {
-    $.ajax({
-      url: "/listarEscalas",
-      method: 'GET',
-    }).done(function(result) {
-      $.each(result, function(a, b) {
-        console.log(b);
-        var montagem = {
-          title: b.associadoNome,
-          start: new Date(b.entrada),
-          end: new Date(b.saida),
-          bakcgroundColor: b.cor,
-          borderColor: b.cor,
-          allDay: false
-        }
-        elementosEvent.push(montagem)
-      })
-      MontaCalendario();
-    });
-  }
-
-  function MontaCalendario() {
-    $(function() {
-
-      /* initialize the external events
-       -----------------------------------------------------------------*/
-      function ini_events(ele) {
-        ele.each(function() {
-
-          // create an Event Object (https://fullcalendar.io/docs/event-object)
-          // it doesn't need to have a start or end
-          var eventObject = {
-            title: $.trim($(this).text()) // use the element's text as the event title
+    function MontaEventos() {
+      $.ajax({
+        url: "/listarEscalas",
+        method: 'GET',
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          console.log(b);
+          var montagem = {
+            title: b.associadoNome,
+            start: new Date(b.entrada),
+            end: new Date(b.saida),
+            bakcgroundColor: b.cor,
+            borderColor: b.cor,
+            allDay: false
           }
+          elementosEvent.push(montagem)
+        })
+        MontaCalendario();
+      });
+    }
 
-          // store the Event Object in the DOM element so we can get to it later
-          $(this).data('eventObject', eventObject)
+    function MontaCalendario() {
+      $(function() {
 
-          // make the event draggable using jQuery UI
-          $(this).draggable({
-            zIndex: 1070,
-            revert: true, // will cause the event to go back to its
-            revertDuration: 0 //  original position after the drag
+        /* initialize the external events
+         -----------------------------------------------------------------*/
+        function ini_events(ele) {
+          ele.each(function() {
+
+            // create an Event Object (https://fullcalendar.io/docs/event-object)
+            // it doesn't need to have a start or end
+            var eventObject = {
+              title: $.trim($(this).text()) // use the element's text as the event title
+            }
+
+            // store the Event Object in the DOM element so we can get to it later
+            $(this).data('eventObject', eventObject)
+
+            // make the event draggable using jQuery UI
+            $(this).draggable({
+              zIndex: 1070,
+              revert: true, // will cause the event to go back to its
+              revertDuration: 0 //  original position after the drag
+            })
+
           })
-
-        })
-      }
-
-      ini_events($('#external-events div.external-event'))
-
-      /* initialize the calendar
-       -----------------------------------------------------------------*/
-      //Date for the calendar events (dummy data)
-      var date = new Date()
-      var d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear()
-
-      var Calendar = FullCalendar.Calendar;
-      var Draggable = FullCalendar.Draggable;
-
-      var containerEl = document.getElementById('external-events');
-      var checkbox = document.getElementById('drop-remove');
-      var calendarEl = document.getElementById('calendar');
-
-      // initialize the external events
-      // -----------------------------------------------------------------
-
-      new Draggable(containerEl, {
-        itemSelector: '.external-event',
-        eventData: function(eventEl) {
-          return {
-            title: eventEl.innerText,
-            backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
-            textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
-          };
         }
-      });
 
+        ini_events($('#external-events div.external-event'))
 
-      var calendar = new Calendar(calendarEl, {
-        locale: 'pt-br',
-        buttonText: {
-          month: 'mês', 
-          day: 'dia', 
-          week: 'semana',
-          today: 'hoje',
-        },
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        themeSystem: 'bootstrap',
-        //Random default events
-        events: elementosEvent,
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function(info) {
-          // is the "remove after drop" checkbox checked?
-          if (checkbox.checked) {
-            // if so, remove the element from the "Draggable Events" list
-            info.draggedEl.parentNode.removeChild(info.draggedEl);
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+        //Date for the calendar events (dummy data)
+        var date = new Date()
+        var d = date.getDate(),
+          m = date.getMonth(),
+          y = date.getFullYear()
+
+        var Calendar = FullCalendar.Calendar;
+        var Draggable = FullCalendar.Draggable;
+
+        var containerEl = document.getElementById('external-events');
+        var checkbox = document.getElementById('drop-remove');
+        var calendarEl = document.getElementById('calendar');
+
+        // initialize the external events
+        // -----------------------------------------------------------------
+
+        new Draggable(containerEl, {
+          itemSelector: '.external-event',
+          eventData: function(eventEl) {
+            return {
+              title: eventEl.innerText,
+              backgroundColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+              borderColor: window.getComputedStyle(eventEl, null).getPropertyValue('background-color'),
+              textColor: window.getComputedStyle(eventEl, null).getPropertyValue('color'),
+            };
           }
-        }
-      });
+        });
 
-      console.warn(calendar.events);
-      calendar.render();
-      // $('#calendar').fullCalendar()
 
-      /* ADDING EVENTS */
-      var currColor = '#3c8dbc' //Red by default
-      // Color chooser button
-      $('#color-chooser > li > a').click(function(e) {
-        e.preventDefault()
-        // Save color
-        currColor = $(this).css('color')
-        // Add color effect to button
-        $('#add-new-event').css({
-          'background-color': currColor,
-          'border-color': currColor
+        var calendar = new Calendar(calendarEl, {
+          locale: 'pt-br',
+          buttonText: {
+            month: 'mês',
+            day: 'dia',
+            week: 'semana',
+            today: 'hoje',
+          },
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          themeSystem: 'bootstrap',
+          //Random default events
+          events: elementosEvent,
+          editable: true,
+          droppable: true, // this allows things to be dropped onto the calendar !!!
+          drop: function(info) {
+            // is the "remove after drop" checkbox checked?
+            if (checkbox.checked) {
+              // if so, remove the element from the "Draggable Events" list
+              info.draggedEl.parentNode.removeChild(info.draggedEl);
+            }
+          }
+        });
+
+        console.warn(calendar.events);
+        calendar.render();
+        // $('#calendar').fullCalendar()
+
+        /* ADDING EVENTS */
+        var currColor = '#3c8dbc' //Red by default
+        // Color chooser button
+        $('#color-chooser > li > a').click(function(e) {
+          e.preventDefault()
+          // Save color
+          currColor = $(this).css('color')
+          // Add color effect to button
+          $('#add-new-event').css({
+            'background-color': currColor,
+            'border-color': currColor
+          })
+        })
+        $('#add-new-event').click(function(e) {
+          e.preventDefault()
+          // Get value and make sure it is not null
+          var val = $('#new-event').val()
+          if (val.length == 0) {
+            return
+          }
+
+          // Create events
+          var event = $('<div />')
+          event.css({
+            'background-color': currColor,
+            'border-color': currColor,
+            'color': '#fff'
+          }).addClass('external-event')
+          event.text(val)
+          $('#external-events').prepend(event)
+
+          // Add draggable funtionality
+          ini_events(event)
+
+          // Remove event from text input
+          $('#new-event').val('')
         })
       })
-      $('#add-new-event').click(function(e) {
-        e.preventDefault()
-        // Get value and make sure it is not null
-        var val = $('#new-event').val()
-        if (val.length == 0) {
-          return
-        }
-
-        // Create events
-        var event = $('<div />')
-        event.css({
-          'background-color': currColor,
-          'border-color': currColor,
-          'color': '#fff'
-        }).addClass('external-event')
-        event.text(val)
-        $('#external-events').prepend(event)
-
-        // Add draggable funtionality
-        ini_events(event)
-
-        // Remove event from text input
-        $('#new-event').val('')
-      })
-    })
-  }
-</script>
-@endsection
+    }
+  </script>
+  @endsection

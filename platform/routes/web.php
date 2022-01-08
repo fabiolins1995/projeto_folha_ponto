@@ -61,6 +61,8 @@ Route::get('/listarDatas', [App\Http\Controllers\Ponto::class, 'listarDatas'])->
 Route::post('/registrarFalta', [App\Http\Controllers\Ponto::class, 'registrarFalta'])->name('registrarFalta');
 Route::post('/registrarHoraExtra', [App\Http\Controllers\Ponto::class, 'registrarHoraExtra'])->name('registrarHoraExtra');
 Route::post('/addEscala', [App\Http\Controllers\Ponto::class, 'addEscala'])->name('addEscala');
+Route::post('/addEscalaGrupo', [App\Http\Controllers\Ponto::class, 'addEscalaGrupo'])->name('addEscalaGrupo');
+
 //Um campo
 //Cadastro
 Route::post('/cadastraFuncao', [App\Http\Controllers\nomeCampo::class, 'cadastraFuncao'])->name('cadastraFuncao');
