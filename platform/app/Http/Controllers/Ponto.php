@@ -113,6 +113,35 @@ class Ponto extends Controller
         }
     }
 
+    public function addEscalaEquipe(Request $request)
+    {
+        try {
+            $listaIds = DB::table('associados')->where('equipe', $request['equipe'])->get('id');
+            for($i = 0; $i < count($request['dataEntradaTabela']);$i++){
+                $dataEntrada = new \DateTime($request['dataEntradaTabela'][$i]);
+                $dataSaida = new \DateTime($dataEntrada->format('Y-m-d') . $request['dataSaidaTabela'][$i]);
+                
+                foreach ($listaIds as $ids) {
+                    $escala = DB::table('registro_escala')->insertGetId([
+                        'associado' => $ids->id,
+                        'local' => $request['local'],
+                        'equipe' => $request['equipe'],
+                        'data_escala' => $dataEntrada->format('Y-m-d'),
+                        'horario_escala_entrada' => $dataEntrada,
+                        'horario_escala_saida' => $dataSaida,
+                    ]);
+                    DB::table('registro_ponto')->insert([
+                        'id_escala' => $escala,
+                        'presenca' => 1
+                    ]);
+                }
+            }            
+            return view('dashadmin');
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
     public function listarDatas(Request $request)
     {
         return DB::table('registro_escala')
