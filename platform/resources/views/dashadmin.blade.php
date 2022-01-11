@@ -23,7 +23,6 @@
           <!-- /btn-group -->
           <div class="input-group">
             <button onclick="addEscala();" style="width:100%;margin-bottom:10px;" type="button" class="btn btn-primary">Individual</button>
-            <button onclick="addEscalaGrupo();" style="width:100%;margin-bottom:10px;" type="button" class="btn btn-primary">Semanal</button>
             <button onclick="addEscalaEquipe();" style="width:100%" type="button" class="btn btn-primary">Carga horária</button>
           </div>
           <!-- /input-group -->
@@ -92,105 +91,6 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
       </div>
       </form>
-    </div>
-  </div>
-</div>
-<!-- 
-  *
-  *
-  * ESCALA SEMANAL
-  *
-  *
-  *
--->
-<div id="modalAddEscalaGrupo" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Adicionar escala semanal</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="/addEscalaGrupo" accept-charset="UTF-8">
-          @csrf
-          <div class="card-body">
-            <div class="form-group">
-              <label for="nomeEquipe">Local</label>
-              <select name="local" class="form-control" id="localModalGrupo"></select>
-            </div>
-            <div class="form-group">
-              <label for="nomeEquipe">Equipe</label>
-              <select name="equipe" class="form-control" id="equipeModalGrupo"></select>
-            </div>
-            <div class="form-group">
-              <label for="nomeEquipe">Hora entrada</label>
-              <input type="text" name="dataEntrada" class="form-control datetimepicker" id="dataEntradaModalGrupo" placeholder="Data entrada">
-            </div>
-            <div class="form-group">
-              <label for="nomeEquipe">Hora saída</label>
-              <input type="text" name="dataSaida" class="form-control datetimepicker" id="dataSaidaModalGrupo" placeholder="Data saída">
-            </div>
-            <div class="form-group">
-              <label for="diasSemeana">Dias da semana</label>
-              <div class="form-check">
-                <input type="checkbox" name="seg" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Seg</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="ter" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Ter</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="qua" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Qua</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="qui" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Qui</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="sex" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Sex</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="sab" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Sab</label>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" name="dom" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Dom</label>
-              </div>
-              <div class="form-group">
-                <label for="mesRef">Mês de referência</label>
-                <select name="mesRef" class="form-control">
-                  <option value="01">Janeiro</option>
-                  <option value="02">Fevereiro</option>
-                  <option value="03">Março</option>
-                  <option value="04">Abril</option>
-                  <option value="05">Maio</option>
-                  <option value="06">Junho</option>
-                  <option value="07">Julho</option>
-                  <option value="08">Agosto</option>
-                  <option value="09">Setembro</option>
-                  <option value="10">Outubro</option>
-                  <option value="11">Novembro</option>
-                  <option value="12">Dezembro</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <select id="ano" name="anoRef" class="form-control">
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>
