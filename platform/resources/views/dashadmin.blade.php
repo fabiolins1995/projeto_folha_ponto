@@ -79,11 +79,11 @@
             </div>
             <div class="form-group">
               <label for="nomeEquipe">Data entrada</label>
-              <input type="text" name="dataEntrada" class="form-control datetimepicker" id="dataEntradaModal" placeholder="Data entrada">
+              <input type="text" name="dataEntrada" class="form-control datetimepicker2" id="dataEntradaModal" placeholder="Data entrada">
             </div>
             <div class="form-group">
               <label for="nomeEquipe">Data saída</label>
-              <input type="text" name="dataSaida" class="form-control datetimepicker" id="dataSaidaModal" placeholder="Data saída">
+              <input type="text" name="dataSaida" class="form-control datetimepicker2" id="dataSaidaModal" placeholder="Data saída">
             </div>
           </div>
       </div>
