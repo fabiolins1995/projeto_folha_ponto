@@ -103,14 +103,14 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link  " href="/horaextra">
                             <i class="fas fa-user "></i>
                             <p>
                                 Hora Extra
                             </p>
                         </a>
-                    </li>
+                    </li>-->
                 <?php }; ?>
             </ul>
         </nav>

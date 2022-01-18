@@ -45,7 +45,7 @@
             <th>Mês/Ano</th>
             <th>Horas Escala</th>
             <th>Horas Registradas</th>
-            <th>Horas Extras</th>
+            <!--<th>Horas Extras</th>-->
           </tr>
         </thead>
         <tbody id="tabelaFinanceiro">
@@ -108,7 +108,7 @@
               html += '<td>' + b.Total + '</td>';
             });
           }); 
-          $.ajax({
+          /*$.ajax({
             url: "/listarFinanceiroExtras?id="+colaborador.id+"&mes="+mes+"&ano="+ano,
             method: 'GET',
             async: false
@@ -119,7 +119,7 @@
             $.each(result, function(a,b){
               html += '<td>' + b.Total + '</td>';
             });
-          });           
+          });  */         
           html += '</tr>';
         });
         $('#tabelaFinanceiro').html(html);
