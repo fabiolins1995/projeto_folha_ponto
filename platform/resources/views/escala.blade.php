@@ -4,7 +4,7 @@
 <div class="card card-primary">
   <div class="card">
     <div class="card-header">
-      <h3 class="card-title">Tabela Financeiro</h3>
+      <h3 class="card-title">Tabela Escala</h3>
 
       <div class="card-tools">
         <div class="input-group input-group-sm" style="width: 200px;">
@@ -39,13 +39,10 @@
         <thead>
           <tr>
             <th>Colaborador</th>
-            <th>Equipe</th>
-            <th>Banco/Agencia/Conta</th>
-            <th>Chave pix</th>
             <th>Mês/Ano</th>
-            <th>Horas Escala</th>
-            <th>Horas Registradas</th>
-            <th>Horas Falta</th>
+            <th>Escala Entrada</th>
+            <th>Escala Saída</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tabelaFinanceiro">
@@ -72,58 +69,54 @@
       var mes = $('#mes').val();
       var ano = $('#ano').val();
       $.ajax({
-      url: "/listarFinanceiro",
+      url: "/listarEscala?mes="+mes+"&ano="+ano,
       method: 'GET',
       async: false
       }).done(function(result) {
         html = '';
         $.each(result, function(a,colaborador){
           html += '<tr>';
-          html += '<td>' + colaborador.nomeAssociado + '</td>';
-          html += '<td>' + colaborador.nomeEquipe + '</td>';
-          html += '<td>' + colaborador.bancoAssociado + '/' + colaborador.agenciaAssociados + '/' + colaborador.contaAssociados + '</td>';
-          html += '<td>' + colaborador.chaveAssociado + '</td>';
+          html += '<td>' + colaborador.associadoNome + '</td>';
           html += '<td>' + mes + '/' + ano + '</td>';
-          $.ajax({
-            url: "/listarFinanceiroEscala?id="+colaborador.id+"&mes="+mes+"&ano="+ano,
-            method: 'GET',
-            async: false
-          }).done(function(result) {
-            if(result.length == 0) {
-              html += '<td></td>';
-            }
-            $.each(result, function(a,b){
-              html += '<td>' + b.Total + '</td>';
-            });
-          });
-          $.ajax({
-            url: "/listarFinanceiroHoras?id="+colaborador.id+"&mes="+mes+"&ano="+ano,
-            method: 'GET',
-            async: false
-          }).done(function(result) {
-            if(result.length == 0) {
-              html += '<td></td>';
-            }
-            $.each(result, function(a,b){
-              html += '<td>' + b.Total + '</td>';
-            });
-          }); 
-          $.ajax({
-            url: "/listarFinanceiroExtras?id="+colaborador.id+"&mes="+mes+"&ano="+ano,
-            method: 'GET',
-            async: false
-          }).done(function(result) {
-            if(result.length == 0) {
-              html += '<td>00:00:00</td>';
-            }
-            $.each(result, function(a,b){
-              html += '<td>' + b.Total + '</td>';
-            });
-          });         
+          html += '<td>' + colaborador.entrada + '</td>';         
+          html += '<td>' + colaborador.saida + '</td>';  
+          html += `<td><i style="cursor:pointer" onclick="TabelaDelete(${colaborador.escalaId})" class="far fa-trash-alt"></i></td>`;       
           html += '</tr>';
         });
         $('#tabelaFinanceiro').html(html);
       });
     }
+    function TabelaDelete(id) {
+    swal({
+      title: "Deseja excluir a escala?",
+      text: "Você irá excluir e não pode voltar atrás",
+      icon: "warning",
+      buttons: [
+        'Não!',
+        'Sim!'
+      ],
+      dangerMode: true,
+    }).then(function(isConfirm) {
+      if (isConfirm) {
+        $.ajax({
+          url: "/delEscala?id=" + id,
+          method: 'GET',
+        }).done(function(result) {
+          if (result == false) {
+            swal("Cancelado", "Erro na exclusão. Contate o administrador.", "error");
+          } else {
+            swal({
+              title: 'Excluído!',
+              text: 'Escala excluída com sucesso!',
+              icon: 'success'
+            });
+            MontaTabela();
+          }
+        });
+      } else {
+        swal("Cancelado", "Não foi excluído a escala", "error");
+      }
+    });
+  }
   </script>
   @endsection

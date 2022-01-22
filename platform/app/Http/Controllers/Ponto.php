@@ -25,6 +25,12 @@ class Ponto extends Controller
             return view('horaextra');
         }
     }
+    public function escala()
+    {
+        if (Auth::user()->tipo == 1) {
+            return view('escala');
+        }
+    }
     public function listarPontos()
     {
         try {
@@ -49,6 +55,32 @@ class Ponto extends Controller
                 ->select('registro_escala.horario_escala_entrada as entrada', 'registro_escala.horario_escala_saida as saida', 'associados.nome as associadoNome', 'locais.nome as localNome', 'equipes.nome as equipeNome', 'equipes.cor') //
                 ->get();
         } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function listarEscala(Request $request)
+    {
+        try {
+            return DB::table('registro_escala')
+                ->join('associados', 'registro_escala.associado', '=', 'associados.id')
+                ->join('locais', 'registro_escala.local', '=', 'locais.id')
+                ->join('equipes', 'registro_escala.equipe', '=', 'equipes.id')
+                ->whereMonth('registro_escala.horario_escala_entrada','=',$request->input('mes'))
+                ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
+                ->select('registro_escala.horario_escala_entrada as entrada', 'registro_escala.horario_escala_saida as saida', 'associados.nome as associadoNome', 'registro_escala.id as escalaId') //
+                ->get();
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function delEscala(Request $request)
+    {
+        try{
+            DB::table('registro_escala')->where('id', '=', $request->query('id'))->delete();
+            return true;
+        }catch(Exception $e){
             return false;
         }
     }

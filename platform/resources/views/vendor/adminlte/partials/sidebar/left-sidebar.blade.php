@@ -76,6 +76,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/escala">
+                            <i class="fas fa-paste "></i>
+                            <p>
+                                Escala
+                            </p>
+                        </a>
+                    </li>
 
                     <li class="nav-header ">
                         Controle usuário

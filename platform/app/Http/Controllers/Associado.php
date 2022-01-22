@@ -39,9 +39,8 @@ class Associado extends Controller
                 ->join('locais', 'registro_escala.local', '=', 'locais.id')
                 ->join('equipes', 'registro_escala.equipe', '=', 'equipes.id')
                 ->join('registro_ponto','registro_escala.id','=','registro_ponto.id_escala')
-                ->where('registro_ponto.presenca','1')
                 ->where('registro_escala.associado', $idAtivo->id)
-                ->select('registro_escala.horario_escala_entrada as entrada','registro_escala.horario_escala_saida as saida', 'associados.nome as associadoNome', 'locais.nome as localNome', 'equipes.nome as equipeNome', 'equipes.cor') //
+                ->select('registro_escala.horario_escala_entrada as entrada','registro_escala.horario_escala_saida as saida', 'registro_ponto.presenca as presenca', 'associados.nome as associadoNome', 'locais.nome as localNome', 'equipes.nome as equipeNome', 'equipes.cor') //
                 ->get();
         } catch (Exception $e) {
             return false;

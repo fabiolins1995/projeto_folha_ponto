@@ -51,6 +51,18 @@
             </div>
         </div>
 
+        {{-- Cpf field --}}
+        <div class="input-group mb-3">
+            <input type="cpf" name="cpf" class="form-control"
+                   placeholder="CPF">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+        </div>
+
         {{-- Email field --}}
         <div class="input-group mb-3">
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
