@@ -77,9 +77,9 @@
         html += '<td>' + b.equipeNome + '</td>';
         html += '<td>' + b.entrada + '</td>';
         html += '<td>' + b.saida + '</td>';
-        if (presenca == 1){
+        if (b.presenca == 1){
           html += '<td>Presença</td>'
-        }else if(presenca == 0){
+        }else if(b.presenca == 0){
           html += '<td>Falta</td>'
         }
         html += '</tr>';
