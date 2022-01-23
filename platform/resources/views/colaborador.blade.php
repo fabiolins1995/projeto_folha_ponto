@@ -14,7 +14,7 @@
       </div>
       <div class="form-group">
         <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" id="telefone" class="form-control" placeholder="Telefone" maxlength="11">
+        <input type="number" name="telefone" id="telefone" class="form-control" placeholder="Telefone" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "13">
       </div>
       <div class="form-group">
         <label for="telefone">E-mail</label>
@@ -22,7 +22,7 @@
       </div>
       <div class="form-group">
         <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf" class="form-control" placeholder="CPF" maxlength="11">
+        <input type="number" name="cpf" id="cpf" class="form-control" placeholder="CPF" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11">
       </div>
       <div class="form-group">
         <label for="equipe">Equipe</label>
@@ -89,11 +89,11 @@
       </div>
       <div class="form-group">
         <label for="numero_agencia">Agência</label>
-        <input type="text" name="numero_agencia" class="form-control" placeholder="Número da agência">
+        <input type="text" name="numero_agencia" class="form-control" placeholder="Número da agência" maxlength = "10">
       </div>
       <div class="form-group">
         <label for="numero_conta">Conta</label>
-        <input type="text" name="numero_conta" class="form-control" placeholder="Número da conta">
+        <input type="text" name="numero_conta" class="form-control" placeholder="Número da conta" maxlength = "20">
       </div>
       <div class="form-group">
         <label for="tipo_de_conta">Tipo</label>
