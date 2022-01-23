@@ -35,17 +35,7 @@
   <div class="card-header">
     <h3 class="card-title">Tabela de Horários</h3>
 
-    <div class="card-tools">
-      <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Pesquisar">
-
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-default">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </div>
+    
   </div>
   <!-- /.card-header -->
   <div class="card-body table-responsive p-0">
@@ -57,6 +47,7 @@
           <th>Equipe</th>
           <th>Data/Hora Entrada</th>
           <th>Data/Hora Saída</th>
+          <th>Total Falta</th>
         </tr>
       </thead>
       <tbody id="tabelaHorario">
@@ -76,6 +67,7 @@
     $.ajax({
       url: "/listaEscala",
       method: 'GET',
+      async: false
     }).done(function(result) {
       html = '';
       $.each(result, function(a, b) {
@@ -85,6 +77,11 @@
         html += '<td>' + b.equipeNome + '</td>';
         html += '<td>' + b.entrada + '</td>';
         html += '<td>' + b.saida + '</td>';
+        if (presenca == 1){
+          html += '<td>Presença</td>'
+        }else if(presenca == 0){
+          html += '<td>Falta</td>'
+        }
         html += '</tr>';
       })
       $('#tabelaHorario').html(html);

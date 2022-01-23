@@ -70,16 +70,15 @@ class financeiroGer extends Controller
 
     public function listarFinanceiroExtras(Request $request)
     {
-        return DB::table('registro_extra')
-            ->join('registro_escala','registro_extra.id_escala','=','registro_escala.id')
+        return DB::table('registro_escala')
             ->join('registro_ponto','registro_escala.id','=','registro_ponto.id_escala')
-            ->where('registro_ponto.presenca','1')
+            ->where('registro_ponto.presenca','0')
             ->where('registro_escala.associado',$request->input('id'))
             ->whereMonth('registro_escala.horario_escala_entrada','=',$request->input('mes'))
             ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
             ->select(
                 'registro_escala.associado as id',
-                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(registro_extra.hora))) as Total"))
+                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(-TIMEDIFF(registro_escala.horario_escala_entrada,registro_escala.horario_escala_saida)))) as Total"))
             ->groupBy('id')
             ->get();
     }

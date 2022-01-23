@@ -113,6 +113,34 @@ class colaboradorGer extends Controller
             ->select('associados.id as id','associados.nome as nomeAssociado','locais.nome as localNome','setores.nome as setorNome','funcoes.nome as funcaoNome','especialidades.nome as especialidadeNome')//
             ->get();
     }
+
+    public function listarColaboradoresPorNome(Request $request)
+    {
+        return DB::table('associados')
+            ->join('locais', 'associados.local','=','locais.id')
+            ->join('setores', 'associados.setor','=','setores.id')
+            ->join('funcoes', 'associados.funcao','=','funcoes.id')
+            ->join('especialidades', 'associados.especialidade','=','especialidades.id')
+            ->where('associados.nome','LIKE', '%'.$request->input('nome').'%')
+            ->select('associados.id as id','associados.nome as nomeAssociado','locais.nome as localNome','setores.nome as setorNome','funcoes.nome as funcaoNome','especialidades.nome as especialidadeNome')//
+            ->get();
+    }
+
+    public function pegaTotalHorasColaborador(Request $request)
+    {
+        $mes = date('m');
+        $ano = date('Y');
+        return DB::table('associados')
+            ->join('registro_escala', 'associados.id','=','registro_escala.associado')
+            ->where('associados.id',$request->input('id'))
+            ->whereMonth('registro_escala.horario_escala_entrada','=',$mes)
+            ->whereYear('registro_escala.horario_escala_entrada','=',$ano)
+            ->select(
+                'associados.id as id',
+                DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(-TIMEDIFF(registro_escala.horario_escala_entrada,registro_escala.horario_escala_saida)))) as Total"))
+            ->groupBy('id')
+            ->get();
+    }
     
     public function deletarColaborador(Request $request)
     {

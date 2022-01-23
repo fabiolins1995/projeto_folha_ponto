@@ -44,6 +44,8 @@ Route::get('/listarColaboradores',[App\http\Controllers\ColaboradorGer::class, '
 Route::get('/listaColaborador',[App\http\Controllers\ColaboradorGer::class, 'listaColaborador'])->name('listaColaborador');
 Route::post('/editarColaborador',[App\http\Controllers\ColaboradorGer::class, 'editarColaborador'])->name('editarColaborador');
 Route::get('/deletarColaborador',[App\http\Controllers\ColaboradorGer::class, 'deletarColaborador'])->name('deletarColaborador');
+Route::get('/pegaTotalHorasColaborador',[App\http\Controllers\ColaboradorGer::class, 'pegaTotalHorasColaborador'])->name('pegaTotalHorasColaborador');
+Route::get('/listarColaboradoresPorNome',[App\http\Controllers\ColaboradorGer::class, 'listarColaboradoresPorNome'])->name('listarColaboradores');
 
 //Financeiro
 Route::get('/financeiro', [App\Http\Controllers\FinanceiroGer::class, 'financeiro'])->name('financeiro');
@@ -78,3 +80,8 @@ Route::get('/listarBancos', [App\Http\Controllers\nomeCampo::class, 'listarBanco
 Route::get('/listarFuncoes', [App\Http\Controllers\nomeCampo::class, 'listarFuncoes'])->name('listarFuncoes');
 Route::get('/listarLocais', [App\Http\Controllers\nomeCampo::class, 'listarLocais'])->name('listarLocais');
 Route::get('/listarSetores', [App\Http\Controllers\nomeCampo::class, 'listarSetores'])->name('listarSetores');
+
+//Escala
+Route::get('/escala', [App\Http\Controllers\Ponto::class, 'escala'])->name('escala');
+Route::get('/listarEscala', [App\Http\Controllers\Ponto::class, 'listarEscala'])->name('listarEscala');
+Route::get('/delEscala', [App\Http\Controllers\Ponto::class, 'delEscala'])->name('delEscala');

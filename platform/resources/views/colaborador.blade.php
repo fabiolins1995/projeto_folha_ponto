@@ -117,10 +117,10 @@
 
     <div class="card-tools">
       <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" name="table_search" class="form-control float-right" placeholder="Pesquisar">
+        <input type="text" id="table_search" name="table_search" class="form-control float-right" placeholder="Pesquisar">
 
         <div class="input-group-append">
-          <button type="submit" class="btn btn-default">
+          <button type="submit" class="btn btn-default" onclick="searchTable()">
             <i class="fas fa-search"></i>
           </button>
         </div>
@@ -137,6 +137,7 @@
           <th>Setor</th>
           <th>Função</th>
           <th>Especialidade</th>
+          <th>Total de horas</th>
           <th></th>
         </tr>
       </thead>
@@ -277,6 +278,7 @@
       $.ajax({
         url: "/listarColaboradores",
         method: 'GET',
+        async: false
       }).done(function(result) {
         $.each(result, function(a, b) {
           html += '<tr>';
@@ -285,6 +287,14 @@
           html += '<td>' + b.setorNome + '</td>';
           html += '<td>' + b.funcaoNome + '</td>';
           html += '<td>' + b.especialidadeNome + '</td>';
+          $.ajax({
+            url: 'pegaTotalHorasColaborador?id=' + b.id,
+            async: false
+          }).done(function(data){
+            $.each(data, function(c, d) {
+              html += '<td>'+ d.Total + '</td>';
+            });                        
+          })
           html += `<td><i style="cursor:pointer" onclick="TabelaEdit(${b.id})" class="far fa-edit"></i> | <i style="cursor:pointer" onclick="TabelaDelete(${b.id})" class="far fa-trash-alt"></i></td>`;
           html += '</tr>';
         });
@@ -717,6 +727,35 @@
           }
         });
         $('#bancoModal').html(html);
+      });
+    }
+    function searchTable(){
+      var html = '';
+      $('#tabelaColaboradores').html(html);
+      $.ajax({
+        url: "/listarColaboradoresPorNome?nome=" + $('#table_search').val(),
+        method: 'GET',
+        async: false
+      }).done(function(result) {
+        $.each(result, function(a, b) {
+          html += '<tr>';
+          html += '<td>' + b.nomeAssociado + '</td>';
+          html += '<td>' + b.localNome + '</td>';
+          html += '<td>' + b.setorNome + '</td>';
+          html += '<td>' + b.funcaoNome + '</td>';
+          html += '<td>' + b.especialidadeNome + '</td>';
+          $.ajax({
+            url: 'pegaTotalHorasColaborador?id=' + b.id,
+            async: false
+          }).done(function(data){
+            $.each(data, function(c, d) {
+              html += '<td>'+ d.Total + '</td>';
+            });                        
+          })
+          html += `<td><i style="cursor:pointer" onclick="TabelaEdit(${b.id})" class="far fa-edit"></i> | <i style="cursor:pointer" onclick="TabelaDelete(${b.id})" class="far fa-trash-alt"></i></td>`;
+          html += '</tr>';
+        });
+        $('#tabelaColaboradores').html(html);
       });
     }
   </script>
