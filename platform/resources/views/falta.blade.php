@@ -11,10 +11,19 @@
       <label for="data" class="form-label"> Data</label>
       <select id="data" name="data" class="form-control"></select>
     </div>
-    <!--<div class="mb-3">
+    <div class="mb-3">
+      <label for="motivo" class="form-label"> Motivo da falta</label>
+      <select id="motivo" name="motivo" class="form-control">
+        <option value="">Selecione</option>
+        <option val="1">Atestado</option>
+        <option val="2">Permuta</option>
+        <option val="3">Passagem de CH</option>
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="obs" class="form-label"> Observações</label>
       <input type="text" id="obs" name="obs" class="form-control" placeholder="">
-    </div>-->
+    </div>
     <button type="submit" class="btn btn-primary">Registrar falta</button>
   </fieldset>
 </form>

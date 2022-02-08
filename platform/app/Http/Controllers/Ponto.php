@@ -151,7 +151,7 @@ class Ponto extends Controller
             $listaIds = DB::table('associados')->where('equipe', $request['equipe'])->get('id');
             for($i = 0; $i < count($request['dataEntradaTabela']);$i++){
                 $dataEntrada = new \DateTime($request['dataEntradaTabela'][$i]);
-                $dataSaida = new \DateTime($dataEntrada->format('Y-m-d') . $request['dataSaidaTabela'][$i]);
+                $dataSaida = new \DateTime($request['dataSaidaTabela'][$i]);
                 
                 foreach ($listaIds as $ids) {
                     $escala = DB::table('registro_escala')->insertGetId([

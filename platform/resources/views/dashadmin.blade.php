@@ -268,7 +268,7 @@
     MontaAno();
     $(function() {
       $('.datetimepicker').appendDtpicker({
-        locale: 'ho'
+        locale: 'br'
       });
       $('.datetimepicker2').appendDtpicker({
         locale: 'br'
