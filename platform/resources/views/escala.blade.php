@@ -89,6 +89,7 @@
             <th>Escala Entrada</th>
             <th>Escala Saída</th>
             <th>Presença</th>
+            <th>Motivo</th>
             <th>Obs</th>
           </tr>
         </thead>
@@ -194,6 +195,7 @@
           }else if(colaborador.presenca == 0){
             html += '<td>Falta</td>'
           }
+          //html += '<td>' + colaborador.obs + '</td>';
           //html += '<td>' + colaborador.obs + '</td>';
           html += `<td><i style="cursor:pointer" onclick="TabelaDelete(${colaborador.escalaId})" class="far fa-trash-alt"></i></td>`;       
           html += '</tr>';
