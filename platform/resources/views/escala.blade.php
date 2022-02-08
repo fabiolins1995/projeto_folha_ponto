@@ -91,6 +91,7 @@
             <th>Presença</th>
             <th>Motivo</th>
             <th>Obs</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tabelaFinanceiro">
@@ -192,11 +193,11 @@
           html += '<td>' + colaborador.saida + '</td>';  
           if (colaborador.presenca == 1){
             html += '<td>Presença</td>'
-          }else if(colaborador.presenca == 0){
+          }else /*if(colaborador.presenca == 0)*/{
             html += '<td>Falta</td>'
           }
-          //html += '<td>' + colaborador.obs + '</td>';
-          //html += '<td>' + colaborador.obs + '</td>';
+          html += '<td>' + /*colaborador.obs +*/ '</td>';
+          html += '<td>' + /*colaborador.obs + */'</td>';
           html += `<td><i style="cursor:pointer" onclick="TabelaDelete(${colaborador.escalaId})" class="far fa-trash-alt"></i></td>`;       
           html += '</tr>';
         });
