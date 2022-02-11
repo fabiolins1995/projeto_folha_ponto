@@ -60,8 +60,9 @@
                             </p>
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link  " href="/colaborador">
+                        <a class="nav-link  " href="/pesquisacolaborador">
                             <i class="fas fa-user "></i>
                             <p>
                                 Colaborador
@@ -86,7 +87,7 @@
                     </li>
 
                     <li class="nav-header ">
-                        Controle usuário
+                        Controle
                     </li>
 
                     <li class="nav-item">
@@ -97,7 +98,14 @@
                             </p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link  " href="/colaborador">
+                            <i class="fas fa-user "></i>
+                            <p>
+                                Novo Colaborador
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-header ">
                         Registro
                     </li>

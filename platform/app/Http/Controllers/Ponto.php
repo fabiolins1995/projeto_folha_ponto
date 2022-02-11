@@ -62,14 +62,39 @@ class Ponto extends Controller
     public function listarEscala(Request $request)
     {
         try {
-            return DB::table('registro_escala')
+            $query = DB::table('registro_escala')
+                ->join('registro_ponto','registro_escala.id','=','registro_ponto.id_escala')
                 ->join('associados', 'registro_escala.associado', '=', 'associados.id')
-                ->join('locais', 'registro_escala.local', '=', 'locais.id')
-                ->join('equipes', 'registro_escala.equipe', '=', 'equipes.id')
-                ->whereMonth('registro_escala.horario_escala_entrada','=',$request->input('mes'))
-                ->whereYear('registro_escala.horario_escala_entrada','=',$request->input('ano'))
-                ->select('registro_escala.horario_escala_entrada as entrada', 'registro_escala.horario_escala_saida as saida', 'associados.nome as associadoNome', 'registro_escala.id as escalaId') //
+                ->where('registro_escala.horario_escala_entrada','>=',$request->input('dataInicial'))
+                ->where('registro_escala.horario_escala_saida','<=',$request->input('dataFinal'));
+            if ($request->input('colaborador') != null){
+                $query = $query->where('associados.id','=',$request->input('colaborador'));
+            }
+            if ($request->input('equipe') != null){
+                $query = $query->where('registro_escala.equipe','=',$request->input('equipe'));
+            }
+            if ($request->input('funcao') != null){
+                $query = $query->where('associados.funcao','=',$request->input('funcao'));
+            }
+            if ($request->input('conselho') != null){
+                $query = $query->where('associados.conselho','=',$request->input('conselho'));
+            }
+            if ($request->input('setor') != null){
+                $query = $query->where('associados.setor','=',$request->input('setor'));
+            }
+            $query = $query
+                ->select(
+                    'registro_escala.horario_escala_entrada as entrada',
+                    'registro_escala.horario_escala_saida as saida',
+                    'associados.nome as associadoNome',
+                    'registro_escala.id as escalaId',
+                    'registro_ponto.motivo as motivo',
+                    'registro_ponto.observacao as observacao',
+                    'registro_ponto.presenca as presenca',
+                    'registro_escala.equipe as equipe'
+                    )
                 ->get();
+            return $query;
         } catch (Exception $e) {
             return false;
         }
@@ -190,6 +215,7 @@ class Ponto extends Controller
             ->where('registro_ponto.id_escala', $request->input('data'))
             ->update([
                 'presenca' => '0',
+                'motivo' => $request->input('motivo'),
                 'observacao' => $request->input('obs')
             ]);
         return view('falta');

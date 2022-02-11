@@ -5,7 +5,7 @@
   <div class="card-header">
     <h3 class="card-title">Registro colaborador</h3>
   </div>
-  <form method="post" action="/salvarColaborador" accept-charset="UTF-8">
+  <form method="post" id="enviaColaborador" action="/salvarColaborador" accept-charset="UTF-8">
     @csrf
     <div class="card-body">
       <div class="form-group">
@@ -18,7 +18,7 @@
       </div>
       <div class="form-group">
         <label for="telefone">E-mail</label>
-        <input type="email" name="email" class="form-control" placeholder="E-mail">
+        <input type="email" name="email" id="email" class="form-control" placeholder="E-mail">
       </div>
       <div class="form-group">
         <label for="cpf">CPF</label>
@@ -89,11 +89,11 @@
       </div>
       <div class="form-group">
         <label for="numero_agencia">Agência</label>
-        <input type="text" name="numero_agencia" class="form-control" placeholder="Número da agência" maxlength = "10">
+        <input type="text" name="numero_agencia" id="agencia" class="form-control" placeholder="Número da agência" maxlength = "10">
       </div>
       <div class="form-group">
         <label for="numero_conta">Conta</label>
-        <input type="text" name="numero_conta" class="form-control" placeholder="Número da conta" maxlength = "20">
+        <input type="text" name="numero_conta" id="conta" class="form-control" placeholder="Número da conta" maxlength = "20">
       </div>
       <div class="form-group">
         <label for="tipo_de_conta">Tipo</label>
@@ -103,161 +103,136 @@
         <label for="chave_pix">Chave Pix</label>
         <input type="text" name="chave_pix" class="form-control" placeholder="Chave Pix">
       </div>
+      <div class="form-group">
+        <label for="data_entrada">Data Entrada</label>
+        <input type="text" name="data_entrada" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="data_afastamento">Data Afastamento</label>
+        <input type="text" name="data_afastamento" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="motivo_afastamento">Motivo Afastamento</label>
+        <input type="text" name="motivo_afastamento" class="form-control" placeholder="Motivo Afastamento">
+      </div>
+      <div class="form-group">
+        <label for="conselho">Nº Conselho</label>
+        <input type="number" name="conselho" id="conselho" class="form-control" placeholder="Nº Conselho">
+      </div>
+      <div class="form-group">
+        <label for="uf_conselho">UF Conselho</label>
+        <input type="text" name="uf_conselho" class="form-control" placeholder="UF Conselho">
+      </div>
+      <div class="form-group">
+        <label for="data_emissao_conselho">Data Emissão Conselhor</label>
+        <input type="text" name="data_emissao_conselho" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="validade_conselho">Validade Conselho</label>
+        <input type="text" name="validade_conselho" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="titulo_eleitor">Título Eleitoral</label>
+        <input type="number" name="titulo_eleitor" class="form-control" placeholder="Título Eleitoral">
+      </div>
+      <div class="form-group">
+        <label for="zona_eleitor">Zona Eleitoral</label>
+        <input type="number" name="zona_eleitor" class="form-control" placeholder="Zona Eleitoral">
+      </div>
+      <div class="form-group">
+        <label for="secao_eleitor">Seção Eleitoral</label>
+        <input type="numer" name="secao_eleitor" class="form-control" placeholder="Seção Eleitoral">
+      </div>
+      <div class="form-group">
+        <label for="data_emissao_eleitor">Data Emissão Título Eleitoral</label>
+        <input type="text" name="data_emissao_eleitor" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="certificado_reservista">Certificado Reservista</label>
+        <input type="text" name="certificado_reservista" class="form-control" placeholder="Certificado Reservista">
+      </div>
+      <div class="form-group">
+        <label for="cnh">CNH</label>
+        <input type="text" name="cnh" class="form-control" placeholder="CNH">
+      </div>
+      <div class="form-group">
+        <label for="setor">Tamanho Uniform</label>
+        <div class="input-group">
+          <select class="form-control" name="tamanho_uniforme" placeholder="Tamanho Uniforme">
+            <option value="">Selecione</option>
+            <option value="PP">PP</option>
+            <option value="P">P</option>
+            <option value="M">M</option>
+            <option value="G">G</option>
+            <option value="GG">GG</option>
+            <option value="XGG">XGG</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="data_nascimento">Data Nascimentol</label>
+        <input type="text" name="data_nascimento" id="data_nascimento" class="form-control datetimepicker">
+      </div>
+      <div class="form-group">
+        <label for="idade">Idade</label>
+        <input type="number" name="idade" class="form-control" placeholder="Idade">
+      </div>
+      <div class="form-group">
+        <label for="naturalidade">Naturalidade</label>
+        <input type="text" name="naturalidade" class="form-control" placeholder="Naturalidade">
+      </div>
+      <div class="form-group">
+        <label for="nacionalidade">Nacionalidade</label>
+        <input type="text" name="nacionalidade" class="form-control" placeholder="nacionalidade">
+      </div>
+      <div class="form-group">
+        <label for="estado_civil">Estado Civil</label>
+        <input type="text" name="estado_civil" class="form-control" placeholder="Estado Civil">
+      </div>
+      <div class="form-group">
+        <label for="regime_casamento">Regime Casamento</label>
+        <input type="text" name="regime_casamento" class="form-control" placeholder="Regime Casamento">
+      </div>
+      <div class="form-group">
+        <label for="pai">Nome do Pai</label>
+        <input type="text" name="pai" class="form-control" placeholder="Nome do Pai">
+      </div>
+      <div class="form-group">
+        <label for="mae">Nome da Mãe</label>
+        <input type="text" name="mae" class="form-control" placeholder="Nome da Mãe">
+      </div>
+      <div class="form-group">
+        <label for="pis">PIS</label>
+        <input type="text" name="pis" class="form-control" placeholder="PIS">
+      </div>
+      <div class="form-group">
+        <label for="identidade">Nº Identidade</label>
+        <input type="number" name="identidade" class="form-control" placeholder="N Identidade">
+      </div>
+      <div class="form-group">
+        <label for="emissor_identidade">Orgão Emissor</label>
+        <input type="text" name="emissor_identidade" class="form-control" placeholder="Orgão Emissor">
+      </div>
+      <div class="form-group">
+        <label for="data_emissao">Data Emissão</label>
+        <input type="text" name="data_emissao" class="form-control datetimepicker">
+      </div>
     </div>
     <!-- /.card-body -->
 
     <div class="card-footer">
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="button" class="btn btn-primary" onclick="checkInput()">Salvar</button>
     </div>
   </form>
 </div>
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Tabela de colaboradores</h3>
 
-    <div class="card-tools">
-      <div class="input-group input-group-sm" style="width: 150px;">
-        <input type="text" id="table_search" name="table_search" class="form-control float-right" placeholder="Pesquisar">
-
-        <div class="input-group-append">
-          <button type="submit" class="btn btn-default" onclick="searchTable()">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- /.card-header -->
-  <div class="card-body table-responsive p-0">
-    <table class="table table-hover text-nowrap">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Local</th>
-          <th>Setor</th>
-          <th>Função</th>
-          <th>Especialidade</th>
-          <th>Total de horas</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tabelaColaboradores">
-      </tbody>
-    </table>
-  </div>
-  <!-- /.card-body -->
-</div>
-<div id="modalEditarColaborador" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Colaborador</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="/editarColaborador" accept-charset="UTF-8">
-          @csrf
-          <input type="hidden" name="idModal" name="idModal" value="" />
-          <div class="card-body">
-            <div class="form-group">
-              <label for="nome">Nome</label>
-              <input type="text" name="nome" id="nomeModal" class="form-control" placeholder="Nome">
-            </div>
-            <div class="form-group">
-              <label for="telefone">Telefone</label>
-              <input type="text" name="telefone" id="telefoneModal" class="form-control" placeholder="Telefone" maxlength="11">
-            </div>
-            <div class="form-group">
-              <label for="email">E-mail</label>
-              <input type="email" name="email" id="emailModal" class="form-control" placeholder="E-mail">
-            </div>
-            <div class="form-group">
-              <label for="cpf">CPF/Registro</label>
-              <input type="text" name="cpf" id="cpfModal" class="form-control cpf" placeholder="CPF/Registro" maxlength="11">
-            </div>
-            <div class="form-group">
-              <label for="equipe">Equipe</label>
-              <div class="input-group">
-                <select class="form-control" name="equipe"  id="equipeModal" placeholder="Equipe">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="local">Local</label>
-              <div class="input-group">
-                <select class="form-control" name="local"  id="localModal" placeholder="Local">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="setor">Setor</label>
-              <div class="input-group">
-                <select class="form-control" name="setor"  id="setorModal" placeholder="Setor">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="funcao">Função</label>
-              <div class="input-group">
-                <select class="form-control" name="funcao"  id="funcaoModal" placeholder="Função">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="especialidade">Especialidade</label>
-              <div class="input-group">
-                <select class="form-control" name="especialidade"  id="especialidadeModal" placeholder="Especialidade">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="especialidade">Banco</label>
-              <div class="input-group">
-                <select class="form-control" name="banco"  id="bancoModal" placeholder="Banco">
-                  <option value=""></option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="numero_agencia">Agência</label>
-              <input type="text" name="numero_agencia" id="numero_agenciaModal" class="form-control" placeholder="Número da agência">
-            </div>
-            <div class="form-group">
-              <label for="numero_conta">Conta</label>
-              <input type="text" name="numero_conta" id="numero_contaModal" class="form-control" placeholder="Número da conta">
-            </div>
-            <div class="form-group">
-              <label for="tipo_de_conta">Tipo</label>
-              <input type="text" name="tipo_de_conta" id="tipo_de_contaModal" class="form-control" placeholder="Tipo da conta">
-            </div>
-            <div class="form-group">
-              <label for="chave_pix">Chave Pix</label>
-              <input type="text" name="chave_pix" id="chave_pixModal" class="form-control" placeholder="Chave Pix">
-            </div>
-          </div>
-          <!-- /.card-body -->
-
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <script>
     window.addEventListener('load', function() {
       
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+      $(function() {
+        $('.datetimepicker').appendDtpicker({
+          locale: 'br2'
+        });
       });
 
       montaEquipe();
@@ -268,6 +243,76 @@
       montaBanco();
       listarColaboradores();
     });
+    /**
+     * Função verifica campos obrigatórios
+     */
+    function checkInput() {
+      $check = true;
+      $cpf = $('#cpf').val();
+      $conselho = $('#conselho').val();
+      $funcao = $('#funcao').val();
+      $email = $('#email').val();
+      $telefone = $('#telefone').val();
+      $banco = $('#banco').val();
+      $agencia = $('#agencia').val();
+      $conta = $('#conta').val();
+
+      if ($cpf == '' || $conselho == '' || $funcao == '' || $email == '' || $telefone == '' || $banco == '' || $agencia == '' || $conta == ''){
+        $check = false;
+        checkCampos()
+      } else if ($check == true) {
+        $('#enviaColaborador').submit();
+      }
+    }
+    function checkCampos() {
+      $('.retypeWord').remove();
+      $('.retype').css({"border": "1px solid lightgrey"})
+
+      $cpf = $('#cpf').val();
+      $conselho = $('#conselho').val();
+      $funcao = $('#funcao').val();
+      $email = $('#email').val();
+      $telefone = $('#telefone').val();
+      $banco = $('#banco').val();
+      $agencia = $('#agencia').val();
+      $conta = $('#conta').val();
+
+      $div = '<span style="color:red;" class="retypeWord">Favor preencher este campo</span>';
+
+      alert('Favor preencher os campos indicados em vermelho')
+        if ($cpf == '') {
+          $('#cpf').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($conselho == '') {
+          $('#conselho').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($funcao == '') {
+          $('#funcao').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($email == '') {
+          $('#email').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($telefone == '') {
+          $('#telefone').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($banco == '') {
+          $('#banco').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($agencia == '') {
+          $('#agencia').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        if ($conta == '') {
+          $('#conta').before($div).css({"border": "1px solid red"}).addClass('retype');
+        }
+        $('.retype').on('keypress', function (e) {
+          if(e.target.className != "form-control"){
+            e.target.className = "form-control";
+            $(e.target).css({"border": "1px solid lightgrey"})
+            e.target.previousSibling.remove();
+          }
+        })
+
+    }
     /**
      * Função monta tabela
      */

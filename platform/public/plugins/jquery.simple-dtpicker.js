@@ -45,6 +45,11 @@
 			months: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
 			format: 'YYYY-MM-DD hh:mm'
 		},
+		br2: {
+			days: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+			months: [ "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ],
+			format: 'YYYY-MM-DD'
+		},
 		pt: {
 			days: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'],
 			months: [ "janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro" ]

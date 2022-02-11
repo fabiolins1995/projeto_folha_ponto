@@ -15,9 +15,9 @@
       <label for="motivo" class="form-label"> Motivo da falta</label>
       <select id="motivo" name="motivo" class="form-control">
         <option value="">Selecione</option>
-        <option val="1">Atestado</option>
-        <option val="2">Permuta</option>
-        <option val="3">Passagem de CH</option>
+        <option value="1">Atestado</option>
+        <option value="2">Permuta</option>
+        <option value="3">Passagem de CH</option>
       </select>
     </div>
     <div class="mb-3">

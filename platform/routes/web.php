@@ -39,6 +39,7 @@ Route::get('/listaEquipe',[App\http\Controllers\EquipesGer::class, 'listaEquipe'
 
 //Colaboradores
 Route::get('/colaborador', [App\Http\Controllers\ColaboradorGer::class, 'colaborador'])->name('colaborador');
+Route::get('/pesquisacolaborador', [App\Http\Controllers\ColaboradorGer::class, 'pesquisa'])->name('pesquisa');
 Route::post('/salvarColaborador',[App\http\Controllers\ColaboradorGer::class, 'salvarColaborador'])->name('salvarColaborador');
 Route::get('/listarColaboradores',[App\http\Controllers\ColaboradorGer::class, 'listarColaboradores'])->name('listarColaboradores');
 Route::get('/listaColaborador',[App\http\Controllers\ColaboradorGer::class, 'listaColaborador'])->name('listaColaborador');

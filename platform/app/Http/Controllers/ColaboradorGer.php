@@ -21,6 +21,13 @@ class colaboradorGer extends Controller
         }
     }
 
+    public function pesquisa()
+    {
+        if(Auth::user()->tipo == 1){ 
+            return view('pesquisacolaborador');
+        }
+    }
+
     public function salvarColaborador(Request $request)
     {
         try{
@@ -38,6 +45,32 @@ class colaboradorGer extends Controller
             $setor = $request->input('setor');
             $telefone = $request->input('telefone');
             $tipo_de_conta = $request->input('tipo_de_conta');
+            $conselho = $request->input('conselho');
+            $data_entrada = $request->input('data_entrada');
+            $data_afastamento = $request->input('data_afastamento');
+            $motivo_afastamento = $request->input('motivo_afastamento');
+            $uf_conselho = $request->input('uf_conselho');
+            $data_emissao_conselho = $request->input('data_emissao_conselho');
+            $validade_conselho = $request->input('validade_conselho');
+            $titulo_eleitor = $request->input('titulo_eleitor');
+            $zona_eleitor = $request->input('zona_eleitor');
+            $secao_eleitor = $request->input('secao_eleitor');
+            $data_emissao_eleitor = $request->input('data_emissao_eleitor');
+            $certificado_reservista = $request->input('certificado_reservista');
+            $cnh = $request->input('cnh');
+            $tamanho_uniforme = $request->input('tamanho_uniforme');
+            $data_nascimento = $request->input('data_nascimento');
+            $idade = $request->input('idade');
+            $naturalidade = $request->input('naturalidade');
+            $nacionalidade = $request->input('nacionalidade');
+            $estado_civil = $request->input('estado_civil');
+            $regime_casamento = $request->input('regime_casamento');
+            $pai = $request->input('pai');
+            $mae = $request->input('mae');
+            $pis = $request->input('pis');
+            $identidade = $request->input('identidade');
+            $emissor_identidade = $request->input('emissor_identidade');
+            $data_emissao = $request->input('data_emissao');
 
             DB::table('associados')->insert([
                 'banco' => $banco, 
@@ -54,6 +87,32 @@ class colaboradorGer extends Controller
                 'setor' => $setor,
                 'telefone' => $telefone,
                 'tipo_de_conta' => $tipo_de_conta,
+                'data_entrada' => $data_entrada,
+                'data_afastamento' => $data_afastamento,
+                'motivo_afastamento' => $motivo_afastamento,
+                'conselho' => $conselho,
+                'uf_conselho' => $uf_conselho,
+                'data_emissao_conselho' => $data_emissao_conselho,
+                'validade_conselho' => $validade_conselho,
+                'titulo_eleitor' => $titulo_eleitor,
+                'zona_eleitor' => $zona_eleitor,
+                'secao_eleitor' => $secao_eleitor,
+                'data_emissao_eleitor' => $data_emissao_eleitor,
+                'certificado_reservista' => $certificado_reservista,
+                'cnh' => $cnh,
+                'tamanho_uniforme' => $tamanho_uniforme,
+                'data_nascimento' => $data_nascimento,
+                'idade' => $idade,
+                'naturalidade' => $naturalidade,
+                'nacionalidade' => $nacionalidade,
+                'estado_civil' => $estado_civil,
+                'regime_casamento' => $regime_casamento,
+                'pai' => $pai,
+                'mae' => $mae,
+                'pis' => $pis,
+                'identidade' => $identidade,
+                'emissor_identidade' => $emissor_identidade,
+                'data_emissao' => $data_emissao,
             ]);
 
             return redirect('/colaborador');
@@ -61,10 +120,10 @@ class colaboradorGer extends Controller
             return $e;
         }
     }
-    
+
     public function editarColaborador(Request $request){
         try{
-            $id = $request->input('id');
+            $id = $request->input('idModal');
             $banco = $request->input('banco');
             $chave_pix = $request->input('chave_pix');
             $cpf = $request->input('cpf');
@@ -79,6 +138,32 @@ class colaboradorGer extends Controller
             $setor = $request->input('setor');
             $telefone = $request->input('telefone');
             $tipo_de_conta = $request->input('tipo_de_conta');
+            $conselho = $request->input('conselho');
+            $data_entrada = $request->input('data_entrada');
+            $data_afastamento = $request->input('data_afastamento');
+            $motivo_afastamento = $request->input('motivo_afastamento');
+            $uf_conselho = $request->input('uf_conselho');
+            $data_emissao_conselho = $request->input('data_emissao_conselho');
+            $validade_conselho = $request->input('validade_conselho');
+            $titulo_eleitor = $request->input('titulo_eleitor');
+            $zona_eleitor = $request->input('zona_eleitor');
+            $secao_eleitor = $request->input('secao_eleitor');
+            $data_emissao_eleitor = $request->input('data_emissao_eleitor');
+            $certificado_reservista = $request->input('certificado_reservista');
+            $cnh = $request->input('cnh');
+            $tamanho_uniforme = $request->input('tamanho_uniforme');
+            $data_nascimento = $request->input('data_nascimento');
+            $idade = $request->input('idade');
+            $naturalidade = $request->input('naturalidade');
+            $nacionalidade = $request->input('nacionalidade');
+            $estado_civil = $request->input('estado_civil');
+            $regime_casamento = $request->input('regime_casamento');
+            $pai = $request->input('pai');
+            $mae = $request->input('mae');
+            $pis = $request->input('pis');
+            $identidade = $request->input('identidade');
+            $emissor_identidade = $request->input('emissor_identidade');
+            $data_emissao = $request->input('data_emissao');
 
             DB::table('associados')->where('id', $id)->update([
                 'banco' => $banco, 
@@ -95,23 +180,60 @@ class colaboradorGer extends Controller
                 'setor' => $setor,
                 'telefone' => $telefone,
                 'tipo_de_conta' => $tipo_de_conta,
+                'data_entrada' => $data_entrada,
+                'data_afastamento' => $data_afastamento,
+                'motivo_afastamento' => $motivo_afastamento,
+                'conselho' => $conselho,
+                'uf_conselho' => $uf_conselho,
+                'data_emissao_conselho' => $data_emissao_conselho,
+                'validade_conselho' => $validade_conselho,
+                'titulo_eleitor' => $titulo_eleitor,
+                'zona_eleitor' => $zona_eleitor,
+                'secao_eleitor' => $secao_eleitor,
+                'data_emissao_eleitor' => $data_emissao_eleitor,
+                'certificado_reservista' => $certificado_reservista,
+                'cnh' => $cnh,
+                'tamanho_uniforme' => $tamanho_uniforme,
+                'data_nascimento' => $data_nascimento,
+                'idade' => $idade,
+                'naturalidade' => $naturalidade,
+                'nacionalidade' => $nacionalidade,
+                'estado_civil' => $estado_civil,
+                'regime_casamento' => $regime_casamento,
+                'pai' => $pai,
+                'mae' => $mae,
+                'pis' => $pis,
+                'identidade' => $identidade,
+                'emissor_identidade' => $emissor_identidade,
+                'data_emissao' => $data_emissao,
             ]);
 
-            return view('colaborador');
+            return redirect('/pesquisacolaborador');
         }catch(Exception $e){
             return $e;
         }
     }
     
-    public function listarColaboradores()
+    public function listarColaboradores(Request $request)
     {
-        return DB::table('associados')
-            ->join('locais', 'associados.local','=','locais.id')
-            ->join('setores', 'associados.setor','=','setores.id')
-            ->join('funcoes', 'associados.funcao','=','funcoes.id')
-            ->join('especialidades', 'associados.especialidade','=','especialidades.id')
-            ->select('associados.id as id','associados.nome as nomeAssociado','locais.nome as localNome','setores.nome as setorNome','funcoes.nome as funcaoNome','especialidades.nome as especialidadeNome')//
+        $query = DB::table('associados')
+            ->join('funcoes', 'associados.funcao','=','funcoes.id');
+            if($request->input('nome') != null){
+                $query = $query->orWhere('associados.nome','like','%'.$request->input('nome').'%');
+            }
+            if($request->input('funcao') != null){
+                $query = $query->where('associados.funcao','=',$request->input('funcao'));
+            }
+            if($request->input('conselho') != null){
+                $query = $query->where('associados.conselho','like','%'.$request->input('conselho').'%');
+            }
+            if($request->input('cpf') != null){
+                $query = $query->where('associados.cpf','like','%'.$request->input('cpf').'%');
+            }
+        $query = $query->select('associados.id as id','associados.nome as nomeAssociado','associados.cpf as cpf','funcoes.nome as funcaoNome','associados.email as email','associados.telefone as telefone','associados.conselho as conselho')//
             ->get();
+
+        return $query;
     }
 
     public function listarColaboradoresPorNome(Request $request)
